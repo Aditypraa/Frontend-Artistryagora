@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-function AButton({
+function ComponentButton({
   children,
   action,
   variant,
@@ -23,4 +23,4 @@ function AButton({
   );
 }
 
-export default AButton;
+export default ComponentButton;
