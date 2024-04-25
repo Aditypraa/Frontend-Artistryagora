@@ -32,23 +32,28 @@ function PageSignin() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    try {
-      const res = await postData(
-        "/cms/auth/signin",
-        form // { email: "", password: "" }
-      );
+    const res = await postData(
+      "/cms/auth/signin",
+      form // { email: "", password: "" }
+    );
 
-      console.log(res.data.data.token);
-
+    if (res?.data?.data) {
       // localStorage.setItem("token", res.data.data.token);
-      dispatch(userLogin(res.data.data.token, res.data.data.role));
+      dispatch(
+        userLogin(
+          res.data.data.token,
+          res.data.data.role,
+          res.data.data.email,
+          res.data.data.refreshToken
+        )
+      );
       setIsLoading(false);
       navigate("/");
-    } catch (error) {
+    } else {
       setIsLoading(false);
       setAlert({
         status: true,
-        message: error?.response?.data?.msg ?? "Internal Server Error",
+        message: res?.response?.data?.msg ?? "Internal Server Error",
         type: "danger",
       });
     }
