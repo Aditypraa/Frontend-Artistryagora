@@ -29,7 +29,7 @@ const Form = ({ form, handleChange, handleSubmit, isLoading }) => {
         loading={isLoading}
         disabeld={isLoading}
         onClick={handleSubmit}
-        className="w-full px-5 py-3"
+        className="w-full px-5 py-3 from-[#6025F5] to-[#FF5555] hover:shadow-[#6025F5]/50"
       >
         Login
       </Button>

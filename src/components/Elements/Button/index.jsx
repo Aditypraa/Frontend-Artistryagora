@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 const Button = ({ children, onClick, loading, disabeld, className }) => {
   return (
     <button
-      className={`${className} rounded-xl bg-gradient-to-br from-[#6025F5] to-[#FF5555]  text-base font-medium text-white transition duration-200 hover:shadow-lg hover:shadow-[#6025F5]/50`}
+      className={`${className} rounded-xl bg-gradient-to-br text-base font-medium text-white transition duration-200 hover:shadow-lg `}
       onClick={onClick}
       disabled={disabeld}
     >
