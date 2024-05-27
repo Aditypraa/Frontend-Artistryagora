@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Breadcrumbs({ textSecound, textThird, urlSecound }) {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center px-4 mt-0">
+    <div className="flex items-center px-4 my-2">
       <nav aria-label="Breadcrumb" className="flex">
         <ol className="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600">
           <li className="flex items-center">

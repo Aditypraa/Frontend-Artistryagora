@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CmsLayouts from "../../components/Layouts/CmsLayouts";
-import Navbar from "../../components/Fragments/Navbar";
 import Breadcrumbs from "../../components/Elements/Breadcrumbs/Breadcrumbs";
 import FormCategories from "./form";
 import Alert from "../../components/Elements/Alert";
 import axios from "axios";
 import { config } from "../../configs";
-import Sidebar from "../../components/Fragments/Sidebar";
 
 function CategoriesCreate() {
   const navigate = useNavigate();
@@ -58,30 +56,25 @@ function CategoriesCreate() {
   return (
     <>
       <CmsLayouts>
-        <Sidebar />
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <Navbar>
-            <Breadcrumbs
-              textSecound={"Categories"}
-              urlSecound={"/categories"}
-              textThird="Create"
-            />
-          </Navbar>
-          {alert.status && (
-            <Alert
-              title={alert.title}
-              description={alert.description}
-              className={alert.className}
-            />
-          )}
-          <div className="py-4 flex justify-center">
-            <FormCategories
-              form={form}
-              isLoading={isLoading}
-              handleChange={handleChange}
-              handleSubmit={handleSubmit}
-            />
-          </div>
+        <Breadcrumbs
+          textSecound={"Categories"}
+          urlSecound={"/categories"}
+          textThird="Create"
+        />
+        {alert.status && (
+          <Alert
+            title={alert.title}
+            description={alert.description}
+            className={alert.className}
+          />
+        )}
+        <div className="py-4 flex justify-center">
+          <FormCategories
+            form={form}
+            isLoading={isLoading}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </CmsLayouts>
     </>

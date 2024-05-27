@@ -1,13 +1,14 @@
 import { useState } from "react";
-import axios from "axios";
 import Alert from "../../components/Elements/Alert";
-import { Navigate, useNavigate } from "react-router-dom";
-import { config } from "../../configs";
+import { useNavigate } from "react-router-dom";
 import Form from "./form";
+import logoArtistryAgora from "../../assets/artistryagora.png";
+import { postData } from "../../utils/fetch";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../redux/auth/actions";
 
 const PagesSignin = () => {
-  const token = localStorage.getItem("token"); // Get token from local storage
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -25,7 +26,6 @@ const PagesSignin = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
-    // console.log(e.target.name, e.target.value);
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -35,16 +35,13 @@ const PagesSignin = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        `${config.VITE_API_HOST_DEV}/cms/auth/signin`,
-        form
-      );
-      //   console.log(response.data.data.token);
-      localStorage.setItem("token", response.data.data.token); // Save token to local storage
+      const response = await postData("/cms/auth/signin", form);
+
+      dispatch(userLogin(response.data.data.token, response.data.data.role));
+
       setIsLoading(false);
       navigate("/");
     } catch (error) {
-      console.log(error.response.data.msg);
       setIsLoading(false);
       setAlert({
         status: true,
@@ -55,22 +52,20 @@ const PagesSignin = () => {
     }
   };
 
-  if (token) return <Navigate to="/" replace={true} />; // Redirect to dashboard page if token is available
-
   return (
-    <main className="w-full h-screen flex flex-col items-center justify-center px-4">
-      <div className="max-w-sm w-full text-gray-600 space-y-5">
-        <div className="text-center pb-8">
+    <main className="w-full h-screen flex items-center justify-center px-4 bg-gray-200 relative overflow-hidden">
+      {/* Decorative shapes */}
+
+      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-2xl space-y-6 relative z-10">
+        <div className="text-center">
           <img
-            src="https://floatui.com/logo.svg"
+            src={logoArtistryAgora}
             width={150}
-            className="mx-auto"
+            className="mx-auto animate-bounce"
           />
-          <div className="mt-5">
-            <h3 className="text-gray-800 text-2xl font-bold sm:text-3xl">
-              Log in to your account
-            </h3>
-          </div>
+          <h3 className="mt-6 text-gray-800 text-2xl font-bold sm:text-3xl">
+            Log in to your account
+          </h3>
         </div>
         {alert.status && (
           <Alert
@@ -79,15 +74,12 @@ const PagesSignin = () => {
             className={alert.className}
           />
         )}
-
-        {/* ======================================= FORM ========================================================== */}
         <Form
           form={form}
           handleChange={handleChange}
           isLoading={isLoading}
           handleSubmit={handleSubmit}
         />
-        {/* ======================================= END FORM ====================================================== */}
       </div>
     </main>
   );
