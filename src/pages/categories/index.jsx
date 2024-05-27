@@ -1,124 +1,117 @@
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchCategories } from "../../redux/categories/actions";
+import Swal from "sweetalert2";
+import { deleteData } from "../../utils/fetch";
+import { setNotif } from "../../redux/notif/actions";
+import { accessCategories } from "../../constants/access";
 import CmsLayouts from "../../components/Layouts/CmsLayouts";
 import Breadcrumbs from "../../components/Elements/Breadcrumbs/Breadcrumbs";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Button from "../../components/Elements/Button";
-import axios from "axios";
-import { config } from "../../configs";
-import Loading from "../../components/Elements/Loading";
+import Alert from "../../components/Elements/Alert";
+import TableFragments from "../../components/Fragments/TableFragments";
+import { useEffect, useState } from "react";
 
 function PagesCategories() {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token"); // Get token from local storage
-  const [data, setData] = useState([]); // Create a state variable to store data
-  const [isLoading, setIsLoading] = useState(false); // Create a state variable to store loading state
+  const dispatch = useDispatch();
+
+  const notif = useSelector((state) => state.notif);
+  const categories = useSelector((state) => state.categories);
+  const [access, setAccess] = useState({
+    tambah: false,
+    hapus: false,
+    edit: false,
+  });
+
+  const checkAccess = () => {
+    let { role } = localStorage.getItem("auth")
+      ? JSON.parse(localStorage.getItem("auth"))
+      : {};
+    const access = { tambah: false, hapus: false, edit: false };
+    Object.keys(accessCategories).forEach(function (key) {
+      if (accessCategories[key].indexOf(role) >= 0) {
+        access[key] = true;
+      }
+    });
+    setAccess(access);
+  };
 
   useEffect(() => {
-    const getCategoriesApi = async () => {
-      setIsLoading(true);
-      try {
-        const response = await axios.get(
-          `${config.VITE_API_HOST_DEV}/cms/categories`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        setIsLoading(false);
-        setData(response.data.data);
-      } catch (error) {
-        setIsLoading(false);
-        console.log(error);
-      }
-    };
-    getCategoriesApi();
+    checkAccess();
   }, []);
 
-  if (!token) return <Navigate to="/signin" replace={true} />; // Redirect to signin page if token is not available
-  return (
-    <CmsLayouts>
-      <Breadcrumbs textSecound="Categories" />
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
-      {/* <!-- component --> */}
-      <section className="container mx-auto p-6">
-        <div className="mb-3">
-          <Button
-            className="px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
-            onClick={() => navigate("/categories/create")}
-          >
-            Tambah
-          </Button>
-        </div>
-        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-          <div className="w-full overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                  <th className="px-4 py-3">No</th>
-                  <th className="px-4 py-3">Name</th>
-                  <th className="px-4 py-3">Action</th>
-                  {/* <th className="px-4 py-3">Status</th>
-                        <th className="px-4 py-3">Date</th> */}
-                </tr>
-              </thead>
-              <tbody className="bg-white">
-                {isLoading ? (
-                  <tr>
-                    <td colSpan={data.length + 1}>
-                      <Loading className="bg-gray-100" />
-                    </td>
-                  </tr>
-                ) : (
-                  data.map((item, index) => (
-                    <tr key={index} className="text-gray-700">
-                      <td className="px-4 py-3 text-sm border">
-                        {(index += 1)}
-                      </td>
-                      <td className="px-4 py-3 border">
-                        <div className="flex items-center text-sm">
-                          {/* <div className="relative w-8 h-8 mr-3 rounded-full md:block">
-                                <img
-                                  className="object-cover w-full h-full rounded-full"
-                                  src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                                  alt=""
-                                  loading="lazy"
-                                />
-                                <div
-                                  className="absolute inset-0 rounded-full shadow-inner"
-                                  aria-hidden="true"
-                                ></div>
-                              </div> */}
-                          <div>
-                            <p className="font-semibold text-black">
-                              {item.name}
-                            </p>
-                            {/* <p className="text-xs text-gray-600">
-                                  Developer
-                                </p> */}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-ms font-semibold border">
-                        <p>Tes</p>
-                      </td>
-                      {/* <td className="px-4 py-3 text-xs border">
-                          <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
-                            {" "}
-                            Acceptable{" "}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 text-sm border">6/4/2000</td> */}
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Apa kamu yakin?",
+      text: "Anda tidak akan dapat mengembalikan Data yang anda hapus!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Iya, Hapus",
+      cancelButtonText: "Batal",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await deleteData(`/cms/categories/${id}`);
+        dispatch(
+          setNotif(
+            true,
+            "success",
+            `berhasil hapus kategori dengan nama : "${res.data.data.name}"`
+          )
+        );
+        dispatch(fetchCategories());
+      }
+    });
+  };
+
+  return (
+    <>
+      <Breadcrumbs textSecound={"Categories"} />
+      <CmsLayouts>
+        <section className="container mx-auto p-6">
+          <div className="mb-3">
+            {access.tambah && (
+              <Button
+                className={
+                  "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
+                }
+                onClick={() => navigate("/categories/create")}
+              >
+                Tambah
+              </Button>
+            )}
           </div>
-        </div>
-      </section>
-    </CmsLayouts>
+
+          <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+            <div className="w-full overflow-x-auto">
+              {notif.status && (
+                <Alert
+                  title={notif.typeNotif}
+                  description={notif.message}
+                  className={"bg-green-400 text-black"}
+                />
+              )}
+
+              <TableFragments
+                status={categories?.status} // Optional chaining
+                thead={["Nama", "Aksi"]}
+                data={categories?.data || []} // Default value if data is undefined
+                tbody={["name"]}
+                editUrl={access.edit ? `/categories/edit` : null}
+                deleteAction={access.hapus ? (id) => handleDelete(id) : null}
+                withoutPagination
+              />
+            </div>
+          </div>
+        </section>
+      </CmsLayouts>
+    </>
   );
 }
 

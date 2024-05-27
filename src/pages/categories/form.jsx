@@ -6,8 +6,8 @@ function FormCategories({ handleSubmit, form, handleChange, isLoading, edit }) {
   return (
     <div>
       <InputForm
-        placeholder={"Nama Kategori"}
-        label="Masukan Nama Kategori"
+        placeholder={"Masukan Nama Kategori"}
+        label="Nama Kategori"
         name="name"
         value={form.name}
         type="text"
@@ -31,7 +31,7 @@ FormCategories.propTypes = {
   form: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  edit: PropTypes.bool.isRequired,
+  edit: PropTypes.bool,
 };
 
 export default FormCategories;

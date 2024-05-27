@@ -1,0 +1,39 @@
+import ReactPaginate from "react-paginate";
+import PropTypes from "prop-types";
+
+const Pagination = (props) => {
+  const { pages, handlePageClick, page = 1 } = props;
+  return (
+    <ReactPaginate
+      previousLabel={"previous"}
+      nextLabel={"next"}
+      breakLabel={
+        <span role="button" className="page-link">
+          ...
+        </span>
+      }
+      breakClassName={"page-item"}
+      pageCount={pages}
+      marginPagesDisplayed={1}
+      pageRangeDisplayed={5}
+      onPageChange={handlePageClick}
+      containerClassName={"pagination"}
+      pageClassName={"page-item"}
+      pageLinkClassName={"page-link"}
+      nextClassName={"page-item"}
+      nextLinkClassName={"page-link"}
+      previousClassName={"page-item"}
+      previousLinkClassName={"page-link"}
+      activeClassName={"active"}
+      forcePage={page - 1}
+    />
+  );
+};
+
+Pagination.propTypes = {
+  pages: PropTypes.number,
+  handlePageClick: PropTypes.func,
+  page: PropTypes.number,
+};
+
+export default Pagination;

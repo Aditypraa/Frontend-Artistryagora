@@ -19,18 +19,19 @@ export async function getData(url, params) {
   }
 }
 
-export async function postData(url, payload, formData = false) {
+export async function postData(url, payload, formData) {
   try {
     const { token } = localStorage.getItem("auth")
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
 
-    return await axios.post(`${config.VITE_API_HOST_DEV}${url}`, payload, {
+    const res = await axios.post(`${config.VITE_API_HOST_DEV}${url}`, payload, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": formData ? "multipart/form-data" : "application/json",
       },
     });
+    return res;
   } catch (err) {
     return handleError(err);
   }

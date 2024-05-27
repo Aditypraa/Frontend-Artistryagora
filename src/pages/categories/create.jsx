@@ -1,15 +1,17 @@
 import { useState } from "react";
+// import { Container } from "react-bootstrap";
+import { postData } from "../../utils/fetch";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setNotif } from "../../redux/notif/actions";
 import CmsLayouts from "../../components/Layouts/CmsLayouts";
 import Breadcrumbs from "../../components/Elements/Breadcrumbs/Breadcrumbs";
 import FormCategories from "./form";
 import Alert from "../../components/Elements/Alert";
-import axios from "axios";
-import { config } from "../../configs";
 
-function CategoriesCreate() {
+function CategoryCreate() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
   });
@@ -24,30 +26,29 @@ function CategoriesCreate() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        `${config.VITE_API_HOST_DEV}/cms/auth/signin`,
-        form
+      const res = await postData("/cms/categories", form);
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil Menambah kategori : "${res.data.data.name}"`
+        )
       );
-      console.log(response.data.data.token);
-      localStorage.setItem("token", response.data.data.token); // Save token to local storage
       navigate("/categories");
       setIsLoading(false);
-    } catch (error) {
-      // console.log(error.response.data.msg);
+    } catch (err) {
       setIsLoading(false);
       setAlert({
+        ...alert,
         status: true,
         title: "Error",
-        description: error?.response?.data?.msg ?? "Internal Server Error",
+        description: err.response.data.msg,
         className: "bg-red-100 text-red-700",
       });
     }
@@ -55,30 +56,28 @@ function CategoriesCreate() {
 
   return (
     <>
-      <CmsLayouts>
-        <Breadcrumbs
-          textSecound={"Categories"}
-          urlSecound={"/categories"}
-          textThird="Create"
+      <Breadcrumbs
+        textSecound={"Categories"}
+        urlSecound={"/categories"}
+        textThird="Create"
+      />
+      {alert.status && (
+        <Alert
+          title={alert.title}
+          description={alert.description}
+          className={alert.className}
         />
-        {alert.status && (
-          <Alert
-            title={alert.title}
-            description={alert.description}
-            className={alert.className}
-          />
-        )}
-        <div className="py-4 flex justify-center">
-          <FormCategories
-            form={form}
-            isLoading={isLoading}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-          />
-        </div>
+      )}
+      <CmsLayouts>
+        <FormCategories
+          form={form}
+          isLoading={isLoading}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
       </CmsLayouts>
     </>
   );
 }
 
-export default CategoriesCreate;
+export default CategoryCreate;

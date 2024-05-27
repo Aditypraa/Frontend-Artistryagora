@@ -9,10 +9,9 @@ import {
   accessPayments,
   accessTalents,
 } from "../../constants/access";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [role, setRole] = useState(null);
@@ -41,7 +40,7 @@ export const Navbar = () => {
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <Link
-            onClick={() => navigate("/")}
+            to={"/"}
             title="Artistry Agora"
             className="inline-flex items-center"
           >
@@ -57,7 +56,7 @@ export const Navbar = () => {
           <ul className="items-center hidden space-x-8 lg:flex">
             <li>
               <Link
-                onClick={() => navigate("/")}
+                to={"/"}
                 title="Home"
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
               >
@@ -66,7 +65,8 @@ export const Navbar = () => {
             </li>
             <li>
               <NavAccess
-                onClick={() => navigate("/categories")}
+                // onClick={() => navigate("/categories")}
+                to={"/categories"}
                 title="Categories"
                 role={role}
                 roles={accessCategories.lihat}
@@ -76,7 +76,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavAccess
-                onClick={() => navigate("/talents")}
+                to={"/talents"}
                 title="Talents"
                 role={role}
                 roles={accessTalents.lihat}
@@ -86,7 +86,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavAccess
-                onClick={() => navigate("/events")}
+                to={"/events"}
                 title="Events"
                 role={role}
                 roles={accessEvents.lihat}
@@ -96,7 +96,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavAccess
-                onClick={() => navigate("/payments")}
+                to={"/payments"}
                 title="Payments"
                 role={role}
                 roles={accessPayments.lihat}
@@ -106,7 +106,7 @@ export const Navbar = () => {
             </li>
             <li>
               <NavAccess
-                onClick={() => navigate("/orders")}
+                to={"/orders"}
                 title="Orders"
                 role={role}
                 roles={accessOrders.lihat}
@@ -149,7 +149,7 @@ export const Navbar = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <Link
-                        onClick={() => navigate("/")}
+                        to={"/"}
                         title="Artistry Agora"
                         className="inline-flex items-center"
                       >
@@ -181,7 +181,7 @@ export const Navbar = () => {
                     <ul className="space-y-4">
                       <li>
                         <Link
-                          onClick={() => navigate("/")}
+                          to={"/"}
                           title="Home"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
@@ -190,7 +190,7 @@ export const Navbar = () => {
                       </li>
                       <li>
                         <NavAccess
-                          onClick={() => navigate("/categories")}
+                          to={"/categories"}
                           title="Categories"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           role={role}
@@ -201,7 +201,7 @@ export const Navbar = () => {
                       </li>
                       <li>
                         <NavAccess
-                          onClick={() => navigate("/talents")}
+                          to={"/talents"}
                           title="Talents"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           role={role}
@@ -212,7 +212,7 @@ export const Navbar = () => {
                       </li>
                       <li>
                         <NavAccess
-                          onClick={() => navigate("/events")}
+                          to={"/events"}
                           title="Events"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           role={role}
@@ -223,7 +223,7 @@ export const Navbar = () => {
                       </li>
                       <li>
                         <NavAccess
-                          onClick={() => navigate("/payments")}
+                          to={"/payments"}
                           title="Payments"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           role={role}
@@ -234,7 +234,7 @@ export const Navbar = () => {
                       </li>
                       <li>
                         <NavAccess
-                          onClick={() => navigate("/orders")}
+                          to={"/orders"}
                           title="Orders"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           role={role}
