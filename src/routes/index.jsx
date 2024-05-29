@@ -5,6 +5,7 @@ import PagesSignin from "../pages/signin";
 import { Navbar } from "../components/Fragments/Navbar";
 import { DashboardRoute } from "./DashboardRoute";
 import { CategoriesRoute } from "./CategoriesRoute";
+import { TalentsRoute } from "./TalentsRoute";
 
 export function AppRoutes() {
   return (
@@ -28,10 +29,10 @@ export function AppRoutes() {
       >
         <Route path="dashboard/*" element={<DashboardRoute />} />
         <Route path="categories/*" element={<CategoriesRoute />} />
-        {/* <Route path="talents/*" element={<TalentsRoute />} />
-        <Route path="events/*" element={<EventsRoute />} />
-        <Route path="payments/*" element={<PaymentsRoute />} />
-        <Route path="orders/*" element={<OrdersRoute />} /> */}
+        <Route path="talents/*" element={<TalentsRoute />} />
+        {/* <Route path="events/*" element={<EventsRoute />} /> */}
+        {/* <Route path="payments/*" element={<PaymentsRoute />} /> */}
+        {/* <Route path="orders/*" element={<OrdersRoute />} /> */}
         <Route path="" element={<Navigate to="/dashboard" replace={true} />} />
       </Route>
     </Routes>

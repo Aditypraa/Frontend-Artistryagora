@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { Container } from "react-bootstrap";
 import { postData } from "../../utils/fetch";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -61,20 +60,24 @@ function CategoryCreate() {
         urlSecound={"/categories"}
         textThird="Create"
       />
-      {alert.status && (
-        <Alert
-          title={alert.title}
-          description={alert.description}
-          className={alert.className}
-        />
-      )}
       <CmsLayouts>
-        <FormCategories
-          form={form}
-          isLoading={isLoading}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <div className="w-full overflow-x-auto">
+            {alert.status && (
+              <Alert
+                title={alert.title}
+                description={alert.description}
+                className={alert.className}
+              />
+            )}
+            <FormCategories
+              form={form}
+              isLoading={isLoading}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+            />
+          </div>
+        </div>
       </CmsLayouts>
     </>
   );

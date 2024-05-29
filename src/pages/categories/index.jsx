@@ -74,42 +74,40 @@ function PagesCategories() {
     <>
       <Breadcrumbs textSecound={"Categories"} />
       <CmsLayouts>
-        <section className="container mx-auto p-6">
-          <div className="mb-3">
-            {access.tambah && (
-              <Button
-                className={
-                  "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
-                }
-                onClick={() => navigate("/categories/create")}
-              >
-                Tambah
-              </Button>
-            )}
-          </div>
+        <div className="mb-3">
+          {access.tambah && (
+            <Button
+              className={
+                "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
+              }
+              onClick={() => navigate("/categories/create")}
+            >
+              Tambah
+            </Button>
+          )}
+        </div>
 
-          <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-            <div className="w-full overflow-x-auto">
-              {notif.status && (
-                <Alert
-                  title={notif.typeNotif}
-                  description={notif.message}
-                  className={"bg-green-400 text-black"}
-                />
-              )}
-
-              <TableFragments
-                status={categories?.status} // Optional chaining
-                thead={["Nama", "Aksi"]}
-                data={categories?.data || []} // Default value if data is undefined
-                tbody={["name"]}
-                editUrl={access.edit ? `/categories/edit` : null}
-                deleteAction={access.hapus ? (id) => handleDelete(id) : null}
-                withoutPagination
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <div className="w-full overflow-x-auto">
+            {notif.status && (
+              <Alert
+                title={notif.typeNotif}
+                description={notif.message}
+                className={"bg-green-400 text-black"}
               />
-            </div>
+            )}
+
+            <TableFragments
+              status={categories?.status} // Optional chaining
+              thead={["Nama", "Aksi"]}
+              data={categories?.data || []} // Default value if data is undefined
+              tbody={["name"]}
+              editUrl={access.edit ? `/categories/edit` : null}
+              deleteAction={access.hapus ? (id) => handleDelete(id) : null}
+              withoutPagination
+            />
           </div>
-        </section>
+        </div>
       </CmsLayouts>
     </>
   );

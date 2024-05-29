@@ -38,7 +38,7 @@ export const fetchCategories = () => {
     try {
       setTimeout(() => {
         dispatch(clearNotif());
-      }, 5000);
+      }, 10000);
 
       let res = await debouncedFetchCategories("/cms/categories");
 

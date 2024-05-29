@@ -6,7 +6,9 @@ const PagesDashboard = () => {
     <>
       <Breadcrumbs />
       <CmsLayouts>
-        <h1>Dashboard</h1>
+        <div className="flex justify-center">
+          <h1>Dashboard</h1>
+        </div>
       </CmsLayouts>
     </>
   );

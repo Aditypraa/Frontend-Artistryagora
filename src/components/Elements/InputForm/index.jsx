@@ -12,7 +12,7 @@ const InputForm = ({
   className,
 }) => {
   return (
-    <div>
+    <div className="my-3 mx-3">
       <Label>{label}</Label>
       <Input
         name={name}
@@ -20,7 +20,7 @@ const InputForm = ({
         type={type}
         onChange={onChange}
         placeholder={placeholder}
-        className={` ${className}w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg`}
+        className={` ${className}  w-full mt-2 px-3 py-2  border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
       />
     </div>
   );

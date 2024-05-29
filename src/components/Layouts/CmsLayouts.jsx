@@ -3,7 +3,9 @@ function CmsLayouts({ children }) {
   return (
     <main className="main flex-grow p-4">
       <div className="h-full bg-gray-200 border-gray-200  shadow-md">
-        <div className="flex justify-center items-center">{children}</div>
+        <div className="flex justify-center items-center">
+          <section className="container mx-auto p-6">{children}</section>
+        </div>
       </div>
     </main>
   );

@@ -77,7 +77,7 @@ function TbodyWithAction({
       ) : (
         <tr>
           <td colSpan={display.length + 1} className="text-center">
-            Tidak Ditemukan Data
+            Data Tidak Ditemukan
           </td>
         </tr>
       )}

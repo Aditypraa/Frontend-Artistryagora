@@ -72,21 +72,24 @@ function CategoryEdit() {
         urlSecound={"/categories"}
         textThird="Edit"
       />
-      {alert.status && (
-        <Alert
-          title={alert.title}
-          description={alert.description}
-          className={alert.className}
-        />
-      )}
       <CmsLayouts className="mt-3">
-        <FormCategories
-          edit
-          form={form}
-          isLoading={isLoading}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          {alert.status && (
+            <Alert
+              title={alert.title}
+              description={alert.description}
+              className={alert.className}
+            />
+          )}
+          <FormCategories
+            edit
+            form={form}
+            isLoading={isLoading}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+          <div className="w-full overflow-x-auto"></div>
+        </div>
       </CmsLayouts>
     </>
   );
