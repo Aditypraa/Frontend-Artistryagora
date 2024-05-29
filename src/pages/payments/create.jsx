@@ -6,13 +6,13 @@ import { setNotif } from "../../redux/notif/actions";
 import CmsLayouts from "../../components/Layouts/CmsLayouts";
 import Breadcrumbs from "../../components/Elements/Breadcrumbs/Breadcrumbs";
 import Alert from "../../components/Elements/Alert";
-import FormTalents from "./form";
+import FormPayments from "./form";
 
-function TalentsCreate() {
+function PaymentsCreate() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
-    name: "",
+    type: "",
     role: "",
     file: "",
     avatar: "",
@@ -103,27 +103,27 @@ function TalentsCreate() {
     try {
       const payload = {
         image: form.file,
-        role: form.role,
-        name: form.name,
+        type: form.type,
       };
 
-      const res = await postData("/cms/talents", payload);
+      const res = await postData("/cms/payments", payload);
 
       dispatch(
         setNotif(
           true,
           "success",
-          `Berhasil menambah talent ${res.data.data.name}`
+          `berhasil Menambah payments ${res.data.data.type}`
         )
       );
-      navigate("/talents");
+      navigate("/payments");
       setIsLoading(false);
     } catch (err) {
       setIsLoading(false);
       setAlert({
+        ...alert,
         status: true,
         title: "Error",
-        description: err.response?.data?.msg || "Something went wrong",
+        description: err.response.data.msg,
         className: "bg-red-100 text-red-700",
       });
     }
@@ -132,8 +132,8 @@ function TalentsCreate() {
   return (
     <>
       <Breadcrumbs
-        textSecound={"Talents"}
-        urlSecound={"/talents"}
+        textSecound={"Payments"}
+        urlSecound={"/payments"}
         textThird="Create"
       />
       <CmsLayouts>
@@ -146,7 +146,7 @@ function TalentsCreate() {
                 className={alert.className}
               />
             )}
-            <FormTalents
+            <FormPayments
               form={form}
               isLoading={isLoading}
               handleChange={handleChange}
@@ -159,4 +159,4 @@ function TalentsCreate() {
   );
 }
 
-export default TalentsCreate;
+export default PaymentsCreate;

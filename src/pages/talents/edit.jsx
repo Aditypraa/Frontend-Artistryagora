@@ -49,8 +49,18 @@ function TalentsEdit() {
   const uploadImage = async (file) => {
     let formData = new FormData();
     formData.append("avatar", file);
-    const res = await postData("/cms/images", formData, true);
-    return res;
+    try {
+      const res = await postData("/cms/images", formData, true);
+      return res;
+    } catch (error) {
+      setAlert({
+        status: true,
+        title: "Upload Error",
+        description: "Failed to upload image.",
+        className: "bg-red-100 text-red-700",
+      });
+      throw error;
+    }
   };
 
   const handleChange = async (e) => {
@@ -60,46 +70,52 @@ function TalentsEdit() {
         e?.target?.files[0]?.type === "image/png" ||
         e?.target?.files[0]?.type === "image/jpeg"
       ) {
-        var size = parseFloat(e.target.files[0].size / 3145728).toFixed(2);
+        const size = parseFloat(e.target.files[0].size / 1024 / 1024).toFixed(
+          2
+        ); // size in MB
 
-        if (size > 2) {
+        if (size > 3) {
           setAlert({
-            ...alert,
             status: true,
             title: "Error",
             description: "Please select image size less than 3 MB",
             className: "bg-red-100 text-red-700",
           });
-          setForm({
-            ...form,
+          setForm((prevForm) => ({
+            ...prevForm,
             file: "",
             [e.target.name]: "",
-          });
+          }));
         } else {
-          const res = await uploadImage(e.target.files[0]);
-
-          setForm({
-            ...form,
-            file: res.data.data._id,
-            [e.target.name]: res.data.data.name,
-          });
+          try {
+            const res = await uploadImage(e.target.files[0]);
+            setForm((prevForm) => ({
+              ...prevForm,
+              file: res.data.data._id,
+              [e.target.name]: res.data.data.name,
+            }));
+          } catch (error) {
+            console.error("Image upload failed:", error);
+          }
         }
       } else {
         setAlert({
-          ...alert,
           status: true,
           title: "Error",
           description: "type image png | jpg | jpeg",
           className: "bg-red-100 text-red-700",
         });
-        setForm({
-          ...form,
+        setForm((prevForm) => ({
+          ...prevForm,
           file: "",
           [e.target.name]: "",
-        });
+        }));
       }
     } else {
-      setForm({ ...form, [e.target.name]: e.target.value });
+      setForm((prevForm) => ({
+        ...prevForm,
+        [e.target.name]: e.target.value,
+      }));
     }
   };
 
@@ -158,7 +174,7 @@ function TalentsEdit() {
               isLoading={isLoading}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
-              edit={true}
+              edit
             />
           </div>
         </div>
