@@ -8,7 +8,7 @@ import Breadcrumbs from "../../components/Elements/Breadcrumbs/Breadcrumbs";
 import FormCategories from "./form";
 import Alert from "../../components/Elements/Alert";
 
-function CategoryCreate() {
+function CategoriesCreate() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form, setForm] = useState({
@@ -83,4 +83,4 @@ function CategoryCreate() {
   );
 }
 
-export default CategoryCreate;
+export default CategoriesCreate;

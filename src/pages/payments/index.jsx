@@ -29,12 +29,15 @@ function PagesPayments() {
     let { role } = localStorage.getItem("auth")
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
+
     const access = { tambah: false, hapus: false, edit: false };
+
     Object.keys(accessPayments).forEach(function (key) {
       if (accessPayments[key].indexOf(role) >= 0) {
         access[key] = true;
       }
     });
+
     setAccess(access);
   };
 
@@ -63,7 +66,7 @@ function PagesPayments() {
           setNotif(
             true,
             "success",
-            `Metode pembayaran "${res.data.data.name}" Berhasil dihapus`
+            `Metode pembayaran "${res.data.data.type}" Berhasil dihapus`
           )
         );
         dispatch(fetchPayments());
@@ -75,42 +78,40 @@ function PagesPayments() {
     <>
       <Breadcrumbs textSecound={"Payments"} />
       <CmsLayouts>
-        <section className="container mx-auto p-6">
-          <div className="mb-3">
-            {access.tambah && (
-              <Button
-                className={
-                  "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
-                }
-                onClick={() => navigate("/payments/create")}
-              >
-                Tambah
-              </Button>
-            )}
-          </div>
+        <div className="mb-3">
+          {access.tambah && (
+            <Button
+              className={
+                "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
+              }
+              onClick={() => navigate("/payments/create")}
+            >
+              Tambah
+            </Button>
+          )}
+        </div>
 
-          <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-            <div className="w-full overflow-x-auto">
-              {notif.status && (
-                <Alert
-                  title={notif.typeNotif}
-                  description={notif.message}
-                  className={"bg-green-400 text-black"}
-                />
-              )}
-
-              <TableFragments
-                status={payments?.status} // Optional chaining
-                thead={["Type", "Avatar", "Aksi"]}
-                data={payments?.data || []} // Default value if data is undefined
-                tbody={["type", "avatar"]}
-                editUrl={access.edit ? `/payments/edit` : null}
-                deleteAction={access.hapus ? (id) => handleDelete(id) : null}
-                withoutPagination
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <div className="w-full overflow-x-auto">
+            {notif.status && (
+              <Alert
+                title={notif.typeNotif}
+                description={notif.message}
+                className={"bg-green-400 text-black"}
               />
-            </div>
+            )}
+
+            <TableFragments
+              status={payments?.status} // Optional chaining
+              thead={["Type", "Avatar", "Aksi"]}
+              data={payments?.data || []} // Default value if data is undefined
+              tbody={["type", "avatar"]}
+              editUrl={access.edit ? `/payments/edit` : null}
+              deleteAction={access.hapus ? (id) => handleDelete(id) : null}
+              withoutPagination
+            />
           </div>
-        </section>
+        </div>
       </CmsLayouts>
     </>
   );

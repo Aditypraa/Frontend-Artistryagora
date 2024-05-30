@@ -6,6 +6,7 @@ import {
   accessCategories,
   accessEvents,
   accessOrders,
+  accessParticipant,
   accessPayments,
   accessTalents,
 } from "../../constants/access";
@@ -86,6 +87,16 @@ export const Navbar = () => {
             </li>
             <li>
               <NavAccess
+                to={"/payments"}
+                title="Payments"
+                role={role}
+                roles={accessPayments.lihat}
+              >
+                Payments
+              </NavAccess>
+            </li>
+            <li>
+              <NavAccess
                 to={"/events"}
                 title="Events"
                 role={role}
@@ -96,12 +107,12 @@ export const Navbar = () => {
             </li>
             <li>
               <NavAccess
-                to={"/payments"}
-                title="Payments"
+                to={"/participants"}
+                title="Participant"
                 role={role}
-                roles={accessPayments.lihat}
+                roles={accessParticipant.lihat}
               >
-                Payments
+                Participant
               </NavAccess>
             </li>
             <li>
@@ -129,7 +140,7 @@ export const Navbar = () => {
           </ul>
           {/* End Logout */}
 
-          <div className="lg:hidden">
+          <div className="lg:hidden z-10">
             {/* Button Menu */}
             <button
               aria-label="Open Menu"
@@ -212,6 +223,17 @@ export const Navbar = () => {
                       </li>
                       <li>
                         <NavAccess
+                          to={"/payments"}
+                          title="Payments"
+                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          role={role}
+                          roles={accessPayments.lihat}
+                        >
+                          Payments
+                        </NavAccess>
+                      </li>
+                      <li>
+                        <NavAccess
                           to={"/events"}
                           title="Events"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -223,13 +245,13 @@ export const Navbar = () => {
                       </li>
                       <li>
                         <NavAccess
-                          to={"/payments"}
-                          title="Payments"
+                          to={"/participants"}
+                          title="Participants"
                           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                           role={role}
-                          roles={accessPayments.lihat}
+                          roles={accessParticipant.lihat}
                         >
-                          Payments
+                          Participants
                         </NavAccess>
                       </li>
                       <li>

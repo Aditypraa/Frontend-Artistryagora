@@ -30,12 +30,15 @@ function PagesTalents() {
     let { role } = localStorage.getItem("auth")
       ? JSON.parse(localStorage.getItem("auth"))
       : {};
+
     const access = { tambah: false, hapus: false, edit: false };
+
     Object.keys(accessTalents).forEach(function (key) {
       if (accessTalents[key].indexOf(role) >= 0) {
         access[key] = true;
       }
     });
+
     setAccess(access);
   };
 

@@ -4,6 +4,8 @@ import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./redux/store.jsx";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

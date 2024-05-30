@@ -12,6 +12,13 @@ export const accessTalents = {
   hapus: ["organizer"],
 };
 
+export const accessPayments = {
+  lihat: ["organizer"],
+  tambah: ["organizer"],
+  edit: ["organizer"],
+  hapus: ["organizer"],
+};
+
 export const accessEvents = {
   lihat: ["organizer"],
   tambah: ["organizer"],
@@ -20,12 +27,6 @@ export const accessEvents = {
 };
 
 export const accessParticipant = {
-  lihat: ["organizer"],
-  tambah: ["organizer"],
-  edit: ["organizer"],
-  hapus: ["organizer"],
-};
-export const accessPayments = {
   lihat: ["organizer"],
   tambah: ["organizer"],
   edit: ["organizer"],

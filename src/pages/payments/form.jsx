@@ -37,7 +37,7 @@ export default function FormPayments({
               alt="171x180"
               src={`${config.VITE_API_IMAGE_DEV}/${form.avatar}`}
             />
-            <caption>Perview image avatar</caption>
+            <figcaption>Perview image avatar</figcaption>
           </figure>
         </div>
       )}
