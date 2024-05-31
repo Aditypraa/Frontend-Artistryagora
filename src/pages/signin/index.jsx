@@ -37,7 +37,14 @@ const PagesSignin = () => {
     try {
       const response = await postData("/cms/auth/signin", form);
 
-      dispatch(userLogin(response.data.data.token, response.data.data.role));
+      dispatch(
+        userLogin(
+          response.data.data.token,
+          response.data.data.role,
+          response.data.data.email,
+          response.data.data.refreshToken
+        )
+      );
 
       setIsLoading(false);
       navigate("/");
