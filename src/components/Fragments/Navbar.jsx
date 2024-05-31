@@ -9,6 +9,8 @@ import {
   accessParticipant,
   accessPayments,
   accessTalents,
+  accessOrganizers,
+  accessAdmin,
 } from "../../constants/access";
 import { Link } from "react-router-dom";
 
@@ -113,6 +115,26 @@ export const Navbar = () => {
                 roles={accessParticipant.lihat}
               >
                 Participant
+              </NavAccess>
+            </li>
+            <li>
+              <NavAccess
+                to={"/admins"}
+                title="Admin"
+                role={role}
+                roles={accessAdmin.lihat}
+              >
+                Admin
+              </NavAccess>
+            </li>
+            <li>
+              <NavAccess
+                to={"/organizers"}
+                title="Organizers"
+                role={role}
+                roles={accessOrganizers.lihat}
+              >
+                Organizers
               </NavAccess>
             </li>
             <li>
@@ -252,6 +274,28 @@ export const Navbar = () => {
                           roles={accessParticipant.lihat}
                         >
                           Participants
+                        </NavAccess>
+                      </li>
+                      <li>
+                        <NavAccess
+                          to={"/admin"}
+                          title="Admin"
+                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          role={role}
+                          roles={accessAdmin.lihat}
+                        >
+                          Admin
+                        </NavAccess>
+                      </li>
+                      <li>
+                        <NavAccess
+                          to={"/organizers"}
+                          title="Organizers"
+                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          role={role}
+                          roles={accessOrganizers.lihat}
+                        >
+                          Organizers
                         </NavAccess>
                       </li>
                       <li>
