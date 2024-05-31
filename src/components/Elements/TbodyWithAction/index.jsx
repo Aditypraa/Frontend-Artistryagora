@@ -21,7 +21,7 @@ function TbodyWithAction({
         <tr>
           <td colSpan={display.length + 1} className="text-center">
             <div className="flex items-center justify-center">
-              <Loading className={"bg-white"} />
+              <Loading />
             </div>
           </td>
         </tr>
