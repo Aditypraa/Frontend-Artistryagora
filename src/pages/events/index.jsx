@@ -157,10 +157,10 @@ function PagesEvents() {
               thead={[
                 "Judul",
                 "Tanggal",
-                "Tempat",
-                "Status",
+                "Lokasi",
+                "Status Event",
                 "Kategori",
-                "Pembicara",
+                "Talent",
                 "Aksi",
               ]}
               data={events.data}
