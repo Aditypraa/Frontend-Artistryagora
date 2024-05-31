@@ -31,7 +31,7 @@ function EventsEdit() {
     tickets: [
       {
         type: "",
-        status: "",
+        statusTicketCategories: "",
         stock: "",
         price: "",
       },
@@ -159,7 +159,7 @@ function EventsEdit() {
       keyPoint: form.keyPoint,
       category: form.category.value,
       talent: form.talent.value,
-      status: form.status,
+      statusTicketCategories: form.statusTicketCategories,
       tickets: form.tickets,
     };
 
@@ -221,7 +221,7 @@ function EventsEdit() {
     let _temp = [...form.tickets];
     _temp.push({
       type: "",
-      status: "",
+      statusTicketCategories: "",
       stock: "",
       price: "",
     });

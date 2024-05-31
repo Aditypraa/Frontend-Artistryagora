@@ -194,7 +194,7 @@ export default function EventsForm({
             <InputForm
               placeholder="Masukan Status Tiket"
               label="Status Ticket"
-              name="status"
+              name="statusTicketCategories"
               value={tic.statusTicketCategories}
               type="text"
               onChange={(e) => handleChangeTicket(e, index)}

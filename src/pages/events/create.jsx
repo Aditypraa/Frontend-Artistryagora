@@ -125,7 +125,7 @@ function EventsCreate() {
       keyPoint: form.keyPoint,
       category: form.category.value,
       talent: form.talent.value,
-      status: form.status,
+      statusTicketCategories: form.statusTicketCategories,
       tickets: form.tickets,
     };
 
@@ -187,9 +187,9 @@ function EventsCreate() {
     let _temp = [...form.tickets];
     _temp.push({
       type: "",
-      statusTicketCategories: "",
-      stock: "",
       price: "",
+      stock: "",
+      statusTicketCategories: "",
     });
 
     setForm({ ...form, tickets: _temp });
