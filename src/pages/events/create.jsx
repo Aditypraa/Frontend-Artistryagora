@@ -41,8 +41,9 @@ function EventsCreate() {
 
   const [alert, setAlert] = useState({
     status: false,
-    type: "",
-    message: "",
+    title: "",
+    description: "",
+    className: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -66,14 +67,17 @@ function EventsCreate() {
         e?.target?.files[0]?.type === "image/png" ||
         e?.target?.files[0]?.type === "image/jpeg"
       ) {
-        var size = parseFloat(e.target.files[0].size / 3145728).toFixed(2);
+        const size = parseFloat(e.target.files[0].size / 1024 / 1024).toFixed(
+          2
+        );
 
-        if (size > 2) {
+        if (size > 3) {
           setAlert({
             ...alert,
             status: true,
-            type: "danger",
-            message: "Please select image size less than 3 MB",
+            title: "Error",
+            description: "Please select image size less than 3 MB",
+            className: "bg-red-100 text-red-700",
           });
           setForm({
             ...form,
@@ -93,8 +97,9 @@ function EventsCreate() {
         setAlert({
           ...alert,
           status: true,
-          type: "danger",
-          message: "type image png | jpg | jpeg",
+          title: "danger",
+          description: "type image png | jpg | jpeg",
+          className: "bg-red-100 text-red-700",
         });
         setForm({
           ...form,
@@ -131,7 +136,7 @@ function EventsCreate() {
 
     const res = await postData("/cms/events", payload);
 
-    if (res.data.data) {
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
@@ -146,8 +151,9 @@ function EventsCreate() {
       setAlert({
         ...alert,
         status: true,
-        type: "danger",
-        message: res.response.data.msg,
+        title: "Error",
+        description: res.response.data.msg,
+        className: "bg-red-100 text-red-700",
       });
     }
   };
@@ -162,11 +168,11 @@ function EventsCreate() {
 
   const handlePlusKeyPoint = () => {
     let _temp = [...form.keyPoint];
-    console.log("_temp1");
-    console.log(_temp);
+    // console.log("_temp1");
+    // console.log(_temp);
     _temp.push("");
-    console.log("_temp2");
-    console.log(_temp);
+    // console.log("_temp2");
+    // console.log(_temp);
 
     setForm({ ...form, keyPoint: _temp });
   };
@@ -222,7 +228,13 @@ function EventsCreate() {
         textThird="Create"
       />
       <CmsLayouts>
-        {alert.status && <Alert type={alert.type} message={alert.message} />}
+        {alert.status && (
+          <Alert
+            title={alert.title}
+            description={alert.description}
+            className={alert.className}
+          />
+        )}
         <EventsForm
           form={form}
           isLoading={isLoading}

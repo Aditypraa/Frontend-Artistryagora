@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getData, postData } from "../../utils/fetch";
+import { getData, postData, putData } from "../../utils/fetch";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setNotif } from "../../redux/notif/actions";
@@ -43,8 +43,9 @@ function EventsEdit() {
 
   const [alert, setAlert] = useState({
     status: false,
-    type: "",
-    message: "",
+    title: "",
+    description: "",
+    className: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -100,14 +101,17 @@ function EventsEdit() {
         e?.target?.files[0]?.type === "image/png" ||
         e?.target?.files[0]?.type === "image/jpeg"
       ) {
-        var size = parseFloat(e.target.files[0].size / 3145728).toFixed(2);
+        const size = parseFloat(e.target.files[0].size / 1024 / 1024).toFixed(
+          2
+        );
 
-        if (size > 2) {
+        if (size > 3) {
           setAlert({
             ...alert,
             status: true,
-            type: "danger",
-            message: "Please select image size less than 3 MB",
+            title: "Error",
+            description: "Please select image size less than 3 MB",
+            className: "bg-red-100 text-red-700",
           });
           setForm({
             ...form,
@@ -127,8 +131,9 @@ function EventsEdit() {
         setAlert({
           ...alert,
           status: true,
-          type: "danger",
-          message: "type image png | jpg | jpeg",
+          title: "danger",
+          description: "type image png | jpg | jpeg",
+          className: "bg-red-100 text-red-700",
         });
         setForm({
           ...form,
@@ -163,14 +168,14 @@ function EventsEdit() {
       tickets: form.tickets,
     };
 
-    const res = await postData("/cms/events", payload);
+    const res = await putData(`/cms/events/${eventId}`, payload);
 
-    if (res.data.data) {
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
           "success",
-          `berhasil tambah events ${res.data.data.title}`
+          `berhasil Merubah events ${res.data.data.title}`
         )
       );
       navigate("/events");
@@ -180,8 +185,9 @@ function EventsEdit() {
       setAlert({
         ...alert,
         status: true,
-        type: "danger",
-        message: res.response.data.msg,
+        title: "danger",
+        description: res.response.data.msg,
+        className: "bg-red-100 text-red-700",
       });
     }
   };
@@ -196,11 +202,11 @@ function EventsEdit() {
 
   const handlePlusKeyPoint = () => {
     let _temp = [...form.keyPoint];
-    console.log("_temp1");
-    console.log(_temp);
+    // console.log("_temp1");
+    // console.log(_temp);
     _temp.push("");
-    console.log("_temp2");
-    console.log(_temp);
+    // console.log("_temp2");
+    // console.log(_temp);
 
     setForm({ ...form, keyPoint: _temp });
   };
@@ -256,7 +262,13 @@ function EventsEdit() {
         textThird="Edit"
       />
       <CmsLayouts>
-        {alert.status && <Alert type={alert.type} message={alert.message} />}
+        {alert.status && (
+          <Alert
+            title={alert.title}
+            description={alert.description}
+            className={alert.className}
+          />
+        )}
         <EventsForm
           form={form}
           isLoading={isLoading}

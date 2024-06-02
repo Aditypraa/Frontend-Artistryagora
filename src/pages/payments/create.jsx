@@ -30,18 +30,8 @@ function PaymentsCreate() {
   const uploadImage = async (file) => {
     let formData = new FormData();
     formData.append("avatar", file);
-    try {
-      const res = await postData("/cms/images", formData, true);
-      return res;
-    } catch (error) {
-      setAlert({
-        status: true,
-        title: "Upload Error",
-        description: "Failed to upload image.",
-        className: "bg-red-100 text-red-700",
-      });
-      throw error;
-    }
+    const res = await postData("/cms/images", formData, true);
+    return res;
   };
 
   const handleChange = async (e) => {
@@ -53,61 +43,59 @@ function PaymentsCreate() {
       ) {
         const size = parseFloat(e.target.files[0].size / 1024 / 1024).toFixed(
           2
-        ); // size in MB
+        );
 
         if (size > 3) {
           setAlert({
+            ...alert,
             status: true,
             title: "Error",
             description: "Please select image size less than 3 MB",
             className: "bg-red-100 text-red-700",
           });
-          setForm((prevForm) => ({
-            ...prevForm,
+          setForm({
+            ...form,
             file: "",
             [e.target.name]: "",
-          }));
+          });
         } else {
-          try {
-            const res = await uploadImage(e.target.files[0]);
-            setForm((prevForm) => ({
-              ...prevForm,
-              file: res.data.data._id,
-              [e.target.name]: res.data.data.name,
-            }));
-          } catch (error) {
-            console.error("Image upload failed:", error);
-          }
+          const res = await uploadImage(e.target.files[0]);
+
+          setForm({
+            ...form,
+            file: res.data.data._id,
+            [e.target.name]: res.data.data.name,
+          });
         }
       } else {
         setAlert({
+          ...alert,
           status: true,
           title: "Error",
           description: "type image png | jpg | jpeg",
           className: "bg-red-100 text-red-700",
         });
-        setForm((prevForm) => ({
-          ...prevForm,
+        setForm({
+          ...form,
           file: "",
           [e.target.name]: "",
-        }));
+        });
       }
     } else {
-      setForm((prevForm) => ({ ...prevForm, [e.target.name]: e.target.value }));
+      setForm({ ...form, [e.target.name]: e.target.value });
     }
   };
 
   const handleSubmit = async () => {
     setIsLoading(true);
 
-    try {
-      const payload = {
-        image: form.file,
-        type: form.type,
-      };
+    const payload = {
+      image: form.file,
+      type: form.type,
+    };
 
-      const res = await postData("/cms/payments", payload);
-
+    const res = await postData("/cms/payments", payload);
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
@@ -117,13 +105,13 @@ function PaymentsCreate() {
       );
       navigate("/payments");
       setIsLoading(false);
-    } catch (err) {
+    } else {
       setIsLoading(false);
       setAlert({
         ...alert,
         status: true,
         title: "Error",
-        description: err.response.data.msg,
+        description: res.response.data.msg,
         className: "bg-red-100 text-red-700",
       });
     }

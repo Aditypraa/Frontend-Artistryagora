@@ -30,8 +30,8 @@ function CategoriesCreate() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    try {
-      const res = await postData("/cms/categories", form);
+    const res = await postData("/cms/categories", form);
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
@@ -41,13 +41,13 @@ function CategoriesCreate() {
       );
       navigate("/categories");
       setIsLoading(false);
-    } catch (err) {
+    } else {
       setIsLoading(false);
       setAlert({
         ...alert,
         status: true,
         title: "Error",
-        description: err.response.data.msg,
+        description: res.response.data.msg,
         className: "bg-red-100 text-red-700",
       });
     }

@@ -34,26 +34,25 @@ const PagesSignin = () => {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    try {
-      const response = await postData("/cms/auth/signin", form);
-
+    const res = await postData("/cms/auth/signin", form);
+    if (res?.data?.data) {
       dispatch(
         userLogin(
-          response.data.data.token,
-          response.data.data.role,
-          response.data.data.email,
-          response.data.data.refreshToken
+          res.data.data.token,
+          res.data.data.role,
+          res.data.data.email,
+          res.data.data.refreshToken
         )
       );
 
       setIsLoading(false);
       navigate("/");
-    } catch (error) {
+    } else {
       setIsLoading(false);
       setAlert({
         status: true,
         title: "Error",
-        description: error?.response?.data?.msg ?? "Internal Server Error",
+        description: res?.response?.data?.msg ?? "Internal Server Error",
         className: "bg-red-100 text-red-700",
       });
     }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -21,6 +21,7 @@ import SearchInput from "../../components/Elements/SearchInput";
 import SelectBox from "../../components/Elements/SelectBox";
 import TableFragments from "../../components/Fragments/TableFragments";
 import Alert from "../../components/Elements/Alert";
+import { accessEvents } from "../../constants/access";
 
 function PagesEvents() {
   const navigate = useNavigate();
@@ -29,6 +30,32 @@ function PagesEvents() {
   const notif = useSelector((state) => state.notif);
   const events = useSelector((state) => state.events);
   const lists = useSelector((state) => state.lists);
+
+  const [access, setAccess] = useState({
+    tambah: false,
+    hapus: false,
+    edit: false,
+  });
+
+  const checkAccess = () => {
+    let { role } = localStorage.getItem("auth")
+      ? JSON.parse(localStorage.getItem("auth"))
+      : {};
+
+    const access = { tambah: false, hapus: false, edit: false };
+
+    Object.keys(accessEvents).forEach(function (key) {
+      if (accessEvents[key].indexOf(role) >= 0) {
+        access[key] = true;
+      }
+    });
+
+    setAccess(access);
+  };
+
+  useEffect(() => {
+    checkAccess();
+  }, []);
 
   useEffect(() => {
     dispatch(fetchEvents());
@@ -101,14 +128,16 @@ function PagesEvents() {
       <Breadcrumbs textSecound={"Events"} />
       <CmsLayouts>
         <div className="mb-3">
-          <Button
-            className={
-              "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
-            }
-            onClick={() => navigate("/events/create")}
-          >
-            Tambah
-          </Button>
+          {access.tambah && (
+            <Button
+              className={
+                "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
+              }
+              onClick={() => navigate("/events/create")}
+            >
+              Tambah
+            </Button>
+          )}
         </div>
 
         {/* Select Box */}
@@ -172,8 +201,8 @@ function PagesEvents() {
                 "categoryName",
                 "talentName",
               ]}
-              editUrl={`/events/edit`}
-              deleteAction={(id) => handleDelete(id)}
+              editUrl={access.edit ? `/events/edit` : null}
+              deleteAction={access.hapus ? (id) => handleDelete(id) : null}
               customAction={(id, status = "") => {
                 return (
                   <Button

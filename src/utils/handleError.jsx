@@ -41,7 +41,7 @@ const handleError = (error) => {
       });
   }
 
-  return Promise.reject(error);
+  return error;
 };
 
 export default handleError;

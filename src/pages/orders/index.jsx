@@ -37,7 +37,7 @@ function PagesOrder() {
             className="cursor-pointer relative"
             onClick={() => setIsShowed(true)}
           >
-            <SearchInput query={displayDate} />
+            <SearchInput disabled query={displayDate} />
             {isShowed && (
               <InputDate
                 date={orders.date}
