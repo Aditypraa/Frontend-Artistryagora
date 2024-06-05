@@ -41,6 +41,16 @@ function TbodyWithAction({
                       />
                     ) : key === "date" ? (
                       moment(item[key]).format("DD-MM-YYYY, h:mm:ss a")
+                    ) : key === "statusEvent" ? (
+                      <span
+                        className={
+                          item[key] === "Published"
+                            ? "bg-green-500 text-white px-2 py-1 rounded"
+                            : "bg-red-500 text-white px-2 py-1 rounded"
+                        }
+                      >
+                        {item[key]}
+                      </span>
                     ) : (
                       item[key]
                     )}
