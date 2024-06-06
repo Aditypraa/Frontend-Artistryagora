@@ -14,6 +14,7 @@ import paymentsReducer from "./payments/reducer";
 import eventsReducer from "./events/reducer";
 import listReducer from "./list/reducer";
 import ordersReducer from "./orders/reducer";
+import adminsReducer from "./admins/reducer";
 
 const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -27,6 +28,7 @@ const rootReducers = combineReducers({
   events: eventsReducer,
   lists: listReducer,
   orders: ordersReducer,
+  admins: adminsReducer,
 });
 // End Global State
 
