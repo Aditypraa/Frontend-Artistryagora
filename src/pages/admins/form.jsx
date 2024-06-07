@@ -11,9 +11,9 @@ export default function FormAdmin({
 }) {
   return (
     <div>
-        <InputForm
+      <InputForm
         placeholder={"Masukan nama admin"}
-        label={"Nama admin"}
+        label={"Nama Admin"}
         name={"name"}
         value={form.name}
         type={"text"}
@@ -22,7 +22,7 @@ export default function FormAdmin({
       />
       <InputForm
         placeholder={"Masukan email admin"}
-        label={"Email admin"}
+        label={"Email"}
         name={"email"}
         value={form.email}
         type={"email"}
@@ -31,7 +31,7 @@ export default function FormAdmin({
       />
       <InputForm
         placeholder={"Masukan password admin"}
-        label={"Password admin"}
+        label={"Password"}
         name={"password"}
         value={form.password}
         type={"password"}
@@ -40,14 +40,14 @@ export default function FormAdmin({
       />
       <InputForm
         placeholder={"Masukan confirm password admin"}
-        label={"Confirm password admin"}
+        label={"Confirm password"}
         name={"confirmPassword"}
         value={form.confirmPassword}
         type={"password"}
         onChange={handleChange}
         controlId="formconfirmPassword"
       />
-   
+
       <div className="my-3 mx-3">
         <Button
           onClick={handleSubmit}
