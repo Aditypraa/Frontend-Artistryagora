@@ -6,10 +6,10 @@ import { setNotif } from "../../redux/notif/actions";
 import CmsLayouts from "../../components/Layouts/CmsLayouts";
 import Breadcrumbs from "../../components/Elements/Breadcrumbs/Breadcrumbs";
 import Alert from "../../components/Elements/Alert";
-import FormAdmin from "./form";
+import FormOrganizers from "./form";
 
-function AdminsEdit() {
-  const { adminId } = useParams();
+function OrganizersEdit() {
+  const { organizerId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -17,7 +17,8 @@ function AdminsEdit() {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "admin",
+    role: "organizer",
+    organizer: "",
   });
 
   // Handler Alert
@@ -37,36 +38,37 @@ function AdminsEdit() {
     });
   };
 
-  const fetchOneUserAdmin = async () => {
-    const result = await getData(`/cms/users/${adminId}`);
+  const fetchOneUserOrganizer = async () => {
+    const result = await getData(`/cms/organizers/${organizerId}`);
     setForm({
       ...form,
       name: result.data.data.name,
       email: result.data.data.email,
       password: result.data.data.password,
       confirmPassword: result.data.data.password,
+      organizer: result.data.data.organizer.organizer,
     });
   };
 
   // STATE
   useState(() => {
-    fetchOneUserAdmin();
+    fetchOneUserOrganizer();
   }, []);
 
   const handleSubmit = async () => {
     setIsLoading(true);
 
-    const res = await putData(`/cms/users/${adminId}`, form);
+    const res = await putData(`/cms/organizers/${organizerId}`, form);
     if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
           "success",
-          `berhasil Mengedit Admin : "${res.data.data.name}"`
+          `berhasil Mengedit Organizer : "${res.data.data.name}"`
         )
       );
       setIsLoading(false);
-      navigate("/admins");
+      navigate("/organizers");
     } else {
       setIsLoading(false);
       setAlert({
@@ -82,8 +84,8 @@ function AdminsEdit() {
   return (
     <>
       <Breadcrumbs
-        textSecound={"Admins"}
-        urlSecound={"/admins"}
+        textSecound={"Organizers"}
+        urlSecound={"/organizers"}
         textThird="Edit"
       />
       <CmsLayouts>
@@ -96,7 +98,7 @@ function AdminsEdit() {
                 className={alert.className}
               />
             )}
-            <FormAdmin
+            <FormOrganizers
               form={form}
               isLoading={isLoading}
               handleChange={handleChange}
@@ -110,4 +112,4 @@ function AdminsEdit() {
   );
 }
 
-export default AdminsEdit;
+export default OrganizersEdit;

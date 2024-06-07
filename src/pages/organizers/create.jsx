@@ -1,15 +1,14 @@
 import { useState } from "react";
-import { getData, putData } from "../../utils/fetch";
-import { useNavigate, useParams } from "react-router-dom";
+import { postData } from "../../utils/fetch";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setNotif } from "../../redux/notif/actions";
 import CmsLayouts from "../../components/Layouts/CmsLayouts";
 import Breadcrumbs from "../../components/Elements/Breadcrumbs/Breadcrumbs";
 import Alert from "../../components/Elements/Alert";
-import FormAdmin from "./form";
+import FormOrganizers from "./form";
 
-function AdminsEdit() {
-  const { adminId } = useParams();
+function OrganizersCreate() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -17,7 +16,8 @@ function AdminsEdit() {
     email: "",
     password: "",
     confirmPassword: "",
-    role: "admin",
+    role: "organizer",
+    organizer: "",
   });
 
   // Handler Alert
@@ -37,36 +37,20 @@ function AdminsEdit() {
     });
   };
 
-  const fetchOneUserAdmin = async () => {
-    const result = await getData(`/cms/users/${adminId}`);
-    setForm({
-      ...form,
-      name: result.data.data.name,
-      email: result.data.data.email,
-      password: result.data.data.password,
-      confirmPassword: result.data.data.password,
-    });
-  };
-
-  // STATE
-  useState(() => {
-    fetchOneUserAdmin();
-  }, []);
-
   const handleSubmit = async () => {
     setIsLoading(true);
 
-    const res = await putData(`/cms/users/${adminId}`, form);
+    const res = await postData("/cms/organizers", form);
     if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
           "success",
-          `berhasil Mengedit Admin : "${res.data.data.name}"`
+          `berhasil Menambah Organizers : "${res.data.data.name}"`
         )
       );
       setIsLoading(false);
-      navigate("/admins");
+      navigate("/organizers");
     } else {
       setIsLoading(false);
       setAlert({
@@ -82,9 +66,9 @@ function AdminsEdit() {
   return (
     <>
       <Breadcrumbs
-        textSecound={"Admins"}
-        urlSecound={"/admins"}
-        textThird="Edit"
+        textSecound={"Organizers"}
+        urlSecound={"/organizers"}
+        textThird="Create"
       />
       <CmsLayouts>
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
@@ -96,12 +80,11 @@ function AdminsEdit() {
                 className={alert.className}
               />
             )}
-            <FormAdmin
+            <FormOrganizers
               form={form}
               isLoading={isLoading}
               handleChange={handleChange}
               handleSubmit={handleSubmit}
-              edit
             />
           </div>
         </div>
@@ -110,4 +93,4 @@ function AdminsEdit() {
   );
 }
 
-export default AdminsEdit;
+export default OrganizersCreate;
