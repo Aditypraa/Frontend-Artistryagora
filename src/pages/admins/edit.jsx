@@ -81,12 +81,12 @@ function AdminsEdit() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Admins"}
-        urlSecound={"/admins"}
-        textThird="Edit"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"Admins"}
+          urlSecound={"/admins"}
+          textThird="Edit"
+        />
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             {alert.status && (

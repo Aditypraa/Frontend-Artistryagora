@@ -75,8 +75,8 @@ function PagesOrganizers() {
 
   return (
     <>
-      <Breadcrumbs textSecound={"Organizers"} />
       <CmsLayouts>
+        <Breadcrumbs textSecound={"Organizers"} />
         <div className="mb-3">
           {access.tambah && (
             <Button

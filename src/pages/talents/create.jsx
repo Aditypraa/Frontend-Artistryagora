@@ -119,12 +119,12 @@ function TalentsCreate() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Talents"}
-        urlSecound={"/talents"}
-        textThird="Create"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"Talents"}
+          urlSecound={"/talents"}
+          textThird="Create"
+        />
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             {alert.status && (

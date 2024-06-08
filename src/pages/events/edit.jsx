@@ -256,12 +256,12 @@ function EventsEdit() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Events"}
-        urlSecound={"/events"}
-        textThird="Edit"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"Events"}
+          urlSecound={"/events"}
+          textThird="Edit"
+        />
         {alert.status && (
           <Alert
             title={alert.title}

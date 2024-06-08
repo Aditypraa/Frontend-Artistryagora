@@ -103,7 +103,7 @@ export default function EventsForm({
               />
               {index !== 0 && (
                 <Button
-                  className="ml-2 text-red-500"
+                  className="ml-2 text-red-500 p-1 bg-red-500"
                   onClick={() => handleMinusKeyPoint(index)}
                 >
                   &times;
@@ -201,7 +201,7 @@ export default function EventsForm({
             />
             {index !== 0 && (
               <Button
-                className="ml-2 text-red-500"
+                className="ml-2 text-red-500 p-1 bg-red-500"
                 onClick={() => handleMinusTicket(index)}
               >
                 &times;

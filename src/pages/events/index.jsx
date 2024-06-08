@@ -125,8 +125,8 @@ function PagesEvents() {
 
   return (
     <>
-      <Breadcrumbs textSecound={"Events"} />
       <CmsLayouts>
+        <Breadcrumbs textSecound={"Events"} />
         <div className="mb-3">
           {access.tambah && (
             <Button

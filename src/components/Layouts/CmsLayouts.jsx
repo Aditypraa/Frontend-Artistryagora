@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 function CmsLayouts({ children }) {
   return (
-    <main className="main flex-grow p-4">
-      <div className="h-full bg-gray-200 border-gray-200  shadow-md">
-        <div className="flex justify-center items-center">
-          <section className="container mx-auto p-6">{children}</section>
+    <>
+      <div className="p-4 sm:ml-64">
+        <div className="p-4 border-2 border-gray-200 border-collapse rounded-lg dark:border-gray-700">
+          {children}
         </div>
       </div>
-    </main>
+    </>
   );
 }
 

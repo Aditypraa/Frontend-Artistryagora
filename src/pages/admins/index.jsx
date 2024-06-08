@@ -75,8 +75,8 @@ function PagesAdmins() {
 
   return (
     <>
-      <Breadcrumbs textSecound={"Admins"} />
       <CmsLayouts>
+        <Breadcrumbs textSecound={"Admins"} />
         <div className="mb-3">
           {access.tambah && (
             <Button

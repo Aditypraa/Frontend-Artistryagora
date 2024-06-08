@@ -67,12 +67,12 @@ function CategoryEdit() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Categories"}
-        urlSecound={"/categories"}
-        textThird="Edit"
-      />
       <CmsLayouts className="mt-3">
+        <Breadcrumbs
+          textSecound={"Categories"}
+          urlSecound={"/categories"}
+          textThird="Edit"
+        />
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           {alert.status && (
             <Alert

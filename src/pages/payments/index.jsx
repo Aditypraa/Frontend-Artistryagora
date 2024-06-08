@@ -76,8 +76,8 @@ function PagesPayments() {
 
   return (
     <>
-      <Breadcrumbs textSecound={"Payments"} />
       <CmsLayouts>
+        <Breadcrumbs textSecound={"Payments"} />
         <div className="mb-3">
           {access.tambah && (
             <Button

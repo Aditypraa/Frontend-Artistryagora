@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import GuestOnlyRoute from "../components/Elements/GuestOnlyRoute";
 import GuardRoute from "../components/Elements/GuardRoute";
 import PagesSignin from "../pages/signin";
-import { Navbar } from "../components/Fragments/Navbar";
 import { DashboardRoute } from "./DashboardRoute";
 import { CategoriesRoute } from "./CategoriesRoute";
 import { TalentsRoute } from "./TalentsRoute";
@@ -11,6 +10,7 @@ import { EventsRoute } from "./EventsRoute";
 import { OrdersRoute } from "./OrdersRoute";
 import { AdminsRoute } from "./AdminsRoute";
 import { OrganizersRoute } from "./OrganizersRoute";
+import Sidebar from "../components/Fragments/Sidebar";
 
 export function AppRoutes() {
   return (
@@ -27,7 +27,7 @@ export function AppRoutes() {
         path="/"
         element={
           <>
-            <Navbar />
+            <Sidebar />
             <GuardRoute />
           </>
         }

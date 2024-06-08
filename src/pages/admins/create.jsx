@@ -9,17 +9,17 @@ import Alert from "../../components/Elements/Alert";
 import FormAdmin from "./form";
 
 function AdminsCreate() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [form, setForm] = useState({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      role: "admin",
-    });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    role: "admin",
+  });
 
-    // Handler Alert
+  // Handler Alert
   const [alert, setAlert] = useState({
     status: false,
     title: "",
@@ -64,12 +64,12 @@ function AdminsCreate() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Admins"}
-        urlSecound={"/admins"}
-        textThird="Create"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"Admins"}
+          urlSecound={"/admins"}
+          textThird="Create"
+        />
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             {alert.status && (

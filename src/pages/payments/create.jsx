@@ -119,12 +119,12 @@ function PaymentsCreate() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Payments"}
-        urlSecound={"/payments"}
-        textThird="Create"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"Payments"}
+          urlSecound={"/payments"}
+          textThird="Create"
+        />
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             {alert.status && (

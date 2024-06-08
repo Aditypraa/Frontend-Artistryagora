@@ -75,8 +75,8 @@ function PagesCategories() {
 
   return (
     <>
-      <Breadcrumbs textSecound={"Categories"} />
       <CmsLayouts>
+        <Breadcrumbs textSecound={"Categories"} />
         <div className="mb-3">
           {access.tambah && (
             <Button

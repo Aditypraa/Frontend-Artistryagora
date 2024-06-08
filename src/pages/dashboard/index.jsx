@@ -4,8 +4,8 @@ import CmsLayouts from "../../components/Layouts/CmsLayouts";
 const PagesDashboard = () => {
   return (
     <>
-      <Breadcrumbs />
       <CmsLayouts>
+        <Breadcrumbs />
         <div className="flex justify-center">
           <h1>Dashboard</h1>
         </div>

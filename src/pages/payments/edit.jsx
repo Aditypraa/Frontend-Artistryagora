@@ -139,12 +139,12 @@ function PaymentsEdit() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"payments"}
-        urlSecound={"/payments"}
-        textThird="Edit"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"payments"}
+          urlSecound={"/payments"}
+          textThird="Edit"
+        />
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             {alert.status && (

@@ -30,8 +30,8 @@ function PagesOrder() {
 
   return (
     <>
-      <Breadcrumbs textSecound={"Orders"} />
       <CmsLayouts>
+        <Breadcrumbs textSecound={"Orders"} />
         <div className="flex flex-wrap">
           <div
             className="cursor-pointer relative"

@@ -77,8 +77,8 @@ function PagesTalents() {
 
   return (
     <>
-      <Breadcrumbs textSecound={"Talents"} />
       <CmsLayouts>
+        <Breadcrumbs textSecound={"Talents"} />
         <section className="container mx-auto p-6">
           <div className="mb-3">
             {access.tambah && (

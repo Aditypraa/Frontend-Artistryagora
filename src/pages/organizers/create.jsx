@@ -65,12 +65,12 @@ function OrganizersCreate() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Organizers"}
-        urlSecound={"/organizers"}
-        textThird="Create"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"Organizers"}
+          urlSecound={"/organizers"}
+          textThird="Create"
+        />
         <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div className="w-full overflow-x-auto">
             {alert.status && (

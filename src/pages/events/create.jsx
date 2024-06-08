@@ -222,12 +222,12 @@ function EventsCreate() {
 
   return (
     <>
-      <Breadcrumbs
-        textSecound={"Events"}
-        urlSecound={"/events"}
-        textThird="Create"
-      />
       <CmsLayouts>
+        <Breadcrumbs
+          textSecound={"Events"}
+          urlSecound={"/events"}
+          textThird="Create"
+        />
         {alert.status && (
           <Alert
             title={alert.title}
