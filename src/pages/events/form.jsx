@@ -88,12 +88,12 @@ export default function EventsForm({
         </div>
       </div>
 
-      <label className="block mt-4">Key Point</label>
       <div className="flex flex-wrap -mx-3">
         {form.keyPoint.map((key, index) => (
           <div className="w-full md:w-1/2 px-3 " key={index}>
             <div className="flex items-center">
               <InputForm
+                label="Key Point"
                 className="form-input w-full"
                 placeholder="Masukan keypoint"
                 value={key}

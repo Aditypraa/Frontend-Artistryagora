@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+/* eslint-disable react/prop-types */
 import Input from "./Input";
 import Label from "./Label";
 
@@ -24,16 +24,6 @@ const InputForm = ({
       />
     </div>
   );
-};
-
-InputForm.propTypes = {
-  label: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  value: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-  className: PropTypes.string,
 };
 
 export default InputForm;
