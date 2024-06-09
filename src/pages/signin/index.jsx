@@ -59,18 +59,17 @@ const PagesSignin = () => {
   };
 
   return (
-    <main className="w-full h-screen flex items-center justify-center px-4 bg-gray-200 relative overflow-hidden">
-      {/* Decorative shapes */}
-
+    <main className="w-full h-screen flex items-center justify-center px-4 bg-cover bg-center  bg-purple-900  top-0 left-0 bg-gradient-to-b from-gray-900 via-gray-900 to-purple-800 bottom-0 leading-5 overflow-hidden">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-2xl space-y-6 relative z-10">
         <div className="text-center">
           <img
             src={logoArtistryAgora}
             width={150}
             className="mx-auto animate-bounce"
+            alt="Artistry Agora Logo"
           />
           <h3 className="mt-6 text-gray-800 text-2xl font-bold sm:text-3xl">
-            Log in to your account
+            Welcome Back
           </h3>
         </div>
         {alert.status && (
