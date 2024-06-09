@@ -3,6 +3,8 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { FaHome, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import NavAccess from "../Elements/NavAccess";
+import imageProfile2 from "../../assets/profile2.png";
+
 import {
   accessCategories,
   accessEvents,
@@ -28,6 +30,7 @@ function Sidebar() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
   const [role, setRole] = useState(null);
+  const [email, setEmail] = useState(null);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -53,11 +56,12 @@ function Sidebar() {
 
   useEffect(() => {
     const fetchData = () => {
-      let { role } = localStorage.getItem("auth")
+      let { role, email } = localStorage.getItem("auth")
         ? JSON.parse(localStorage.getItem("auth"))
         : {};
 
       setRole(role);
+      setEmail(email);
     };
     fetchData();
   }, []);
@@ -100,16 +104,16 @@ function Sidebar() {
               </h1>
               <div id="profile" className="space-y-3">
                 <img
-                  src="https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                  src={imageProfile2}
                   alt="Avatar user"
                   className="w-10 md:w-16 rounded-full mx-auto"
                 />
                 <div>
                   <h2 className="font-medium text-xs md:text-sm text-center text-teal-500">
-                    Eduard Pantazi
+                    {email}
                   </h2>
-                  <p className="text-xs text-gray-500 text-center">
-                    Administrator
+                  <p className="text-xs font-bold uppercase text-gray-400 text-center">
+                    {role}
                   </p>
                 </div>
               </div>
