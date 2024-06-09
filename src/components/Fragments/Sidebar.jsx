@@ -9,7 +9,6 @@ import {
   accessCategories,
   accessEvents,
   accessOrders,
-  // accessParticipant,
   accessPayments,
   accessTalents,
   accessOrganizers,
@@ -20,11 +19,11 @@ import {
   MdOutlineEmojiEvents,
   MdOutlinePayments,
 } from "react-icons/md";
-import { RiAdminLine } from "react-icons/ri";
+import { RiAdminLine, RiLogoutCircleLine } from "react-icons/ri";
 import { GrTransaction } from "react-icons/gr";
 import { IoPeopleCircleOutline } from "react-icons/io5";
-// import { IoIosPeople } from "react-icons/io";
 import { GiOrganigram } from "react-icons/gi";
+import Button from "../Elements/Button";
 
 function Sidebar() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -73,7 +72,7 @@ function Sidebar() {
 
   return (
     <>
-      {/* Toogle Button */}
+      {/* Toggle Button */}
       <button
         onClick={toggleSidebar}
         aria-controls="default-sidebar"
@@ -83,18 +82,18 @@ function Sidebar() {
         <span className="sr-only">Open sidebar</span>
         <AiOutlineMenu className="w-6 h-6" />
       </button>
-      {/*End Toogle Button */}
+      {/*End Toggle Button */}
 
       <aside
         id="default-sidebar"
         ref={sidebarRef}
         className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:translate-x-0`}
+        } sm:translate-x-0 flex flex-col`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-black to-purple-900 ">
-          <div className="font-poppins antialiased">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-gradient-to-b from-black to-purple-900 flex flex-col">
+          <div className="font-poppins antialiased flex-grow">
             <div className="space-y-6 md:space-y-10 mt-10">
               <h1 className="text-white font-bold text-4xl text-center md:hidden">
                 Ag<span className="text-teal-600">.</span>
@@ -125,13 +124,13 @@ function Sidebar() {
                   className="w-full rounded-tl-md rounded-bl-md px-2 py-3 text-sm text-gray-600 focus:outline-none"
                   placeholder="Search"
                 />
-                <button className="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block bg-white">
+                <button className="rounded-tr-md rounded-br-md px-2 py-3 hidden md:block bg-gray-300">
                   <FaSearch className="w-4 h-4" />
                 </button>
               </div>
               {/* End Search */}
 
-              {/* Acces Sidebar */}
+              {/* Access Sidebar */}
               <div className="flex flex-col space-y-2">
                 <Link
                   to={"/"}
@@ -142,7 +141,6 @@ function Sidebar() {
                   <span className=""> Home</span>
                 </Link>
                 <NavAccess
-                  // onClick={() => navigate("/categories")}
                   to={"/categories"}
                   title="Categories"
                   role={role}
@@ -182,16 +180,6 @@ function Sidebar() {
                   <MdOutlineEmojiEvents className="w-6 h-6 fill-current inline-block" />
                   <span> Events</span>
                 </NavAccess>
-                {/* <NavAccess
-                  to={"/participants"}
-                  title="Participant"
-                  role={role}
-                  roles={accessParticipant.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
-                >
-                  <IoIosPeople className="w-6 h-6 fill-current inline-block" />
-                  <span> Participant</span>
-                </NavAccess> */}
                 <NavAccess
                   to={"/admins"}
                   title="Admin"
@@ -217,22 +205,26 @@ function Sidebar() {
                   title="Orders"
                   role={role}
                   roles={accessOrders.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className="text-sm font-medium text-white py-2 px-2  hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
                 >
                   <GrTransaction className="w-6 h-6 fill-current inline-block" />
                   <span> Orders</span>
                 </NavAccess>
-                <button
-                  onClick={handleLogout}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
-                  title="Logout"
-                >
-                  Logout
-                </button>
               </div>
-              {/* End Acces Sidebar */}
+              {/* End Access Sidebar */}
             </div>
           </div>
+
+          {/* Logout Button */}
+          <Button
+            onClick={handleLogout}
+            className="text-sm font-medium text-white py-2 px-2 from-black hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out mt-auto"
+            title="Logout"
+          >
+            <RiLogoutCircleLine className="w-6 h-6 fill-current inline-block" />
+            <span> Logout</span>
+          </Button>
+          {/* End Logout Button */}
         </div>
       </aside>
     </>
