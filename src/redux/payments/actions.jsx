@@ -8,7 +8,7 @@ import { getData } from "../../utils/fetch";
 import debounce from "debounce-promise";
 import { clearNotif } from "../notif/actions";
 
-let debouncedFetchPayments = debounce(getData, 1000);
+let debouncedFetchPayments = debounce(getData, 10);
 
 export const startFetchingPayments = () => {
   return {

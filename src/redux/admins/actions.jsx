@@ -7,7 +7,7 @@ import {
   ERROR_FETCHING_ADMINS,
 } from "./constants";
 
-let debouncedFetchAdmin = debounce(getData, 1000);
+let debouncedFetchAdmin = debounce(getData, 10);
 
 export const startFetchingAdmin = () => {
   return {
@@ -34,7 +34,7 @@ export const fetchAdmins = () => {
     try {
       setTimeout(() => {
         dispatch(clearNotif());
-      }, 5000);
+      }, 10000);
 
       let res = await debouncedFetchAdmin("/cms/users");
 

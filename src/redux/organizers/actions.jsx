@@ -7,7 +7,7 @@ import {
   SUCCESS_FETCHING_ORGANIZERS,
 } from "./constants";
 
-let debouncedFetchOrganizers = debounce(getData, 1000);
+let debouncedFetchOrganizers = debounce(getData, 10);
 
 export const startFetchingOrganizers = () => {
   return {
@@ -34,7 +34,7 @@ export const fetchOrganizers = () => {
     try {
       setTimeout(() => {
         dispatch(clearNotif());
-      }, 5000);
+      }, 1000);
 
       let res = await debouncedFetchOrganizers("/cms/organizers");
 

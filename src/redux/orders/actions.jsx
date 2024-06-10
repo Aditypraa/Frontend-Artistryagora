@@ -11,7 +11,7 @@ import debounce from "debounce-promise";
 import { clearNotif } from "../notif/actions";
 import moment from "moment";
 
-let debouncedFetchOrders = debounce(getData, 1000);
+let debouncedFetchOrders = debounce(getData, 10);
 
 export const startFetchingOrders = () => {
   return {

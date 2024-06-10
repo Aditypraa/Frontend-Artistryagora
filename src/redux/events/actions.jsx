@@ -11,7 +11,7 @@ import { getData } from "../../utils/fetch";
 import debounce from "debounce-promise";
 import { clearNotif } from "../notif/actions";
 
-let debouncedFetchEvents = debounce(getData, 1000);
+let debouncedFetchEvents = debounce(getData, 10);
 
 export const startFetchingEvents = () => {
   return {

@@ -9,7 +9,7 @@ import { getData } from "../../utils/fetch";
 import debounce from "debounce-promise";
 import { clearNotif } from "../notif/actions";
 
-let debouncedFetchTalents = debounce(getData, 1000);
+let debouncedFetchTalents = debounce(getData, 10);
 
 export const startFetchingTalents = () => {
   return {
