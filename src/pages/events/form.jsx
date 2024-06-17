@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { FaRegSave } from "react-icons/fa";
 import Button from "../../components/Elements/Button";
 import InputForm from "../../components/Elements/InputForm";
 import SelectBox from "../../components/Elements/SelectBox";
@@ -225,7 +226,8 @@ export default function EventsForm({
           disabled={isLoading}
           className="w-full px-5 py-3 bg-blue-500 hover:shadow-[#6025F5]/50"
         >
-          {edit ? "Ubah" : "Simpan"}
+          <FaRegSave className="w-6 h-6 fill-current inline-block" />
+          <span> {edit ? "Edit" : "Simpan"}</span>
         </Button>
       </div>
     </div>

@@ -4,6 +4,8 @@ import Loading from "../Loading";
 import moment from "moment";
 import { config } from "../../../configs";
 import Button from "../Button";
+import { MdDeleteForever } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 
 function TbodyWithAction({
   data,
@@ -67,7 +69,8 @@ function TbodyWithAction({
                     }
                     onClick={() => navigate(`${editUrl}/${item._id}`)}
                   >
-                    Edit
+                    <CiEdit className="w-6 h-6 fill-current inline-block" />
+                    <span> Edit</span>
                   </Button>
                 )}
                 {deleteAction && (
@@ -77,6 +80,7 @@ function TbodyWithAction({
                     }
                     onClick={() => deleteAction(item._id)}
                   >
+                    <MdDeleteForever className="w-6 h-6 fill-current inline-block" />
                     Hapus
                   </Button>
                 )}

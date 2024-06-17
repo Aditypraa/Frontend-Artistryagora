@@ -12,6 +12,7 @@ import TableFragments from "../../components/Fragments/TableFragments";
 import { useEffect, useState } from "react";
 import { fetchTalents, setKeyword } from "../../redux/talents/actions";
 import SearchInput from "../../components/Elements/SearchInput";
+import { IoMdAddCircle } from "react-icons/io";
 
 function PagesTalents() {
   const navigate = useNavigate();
@@ -88,7 +89,8 @@ function PagesTalents() {
                 }
                 onClick={() => navigate("/talents/create")}
               >
-                Tambah
+                <IoMdAddCircle className="w-6 h-6 fill-current inline-block" />
+                <span> Tambah</span>
               </Button>
             )}
           </div>

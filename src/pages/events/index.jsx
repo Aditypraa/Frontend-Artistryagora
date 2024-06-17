@@ -22,6 +22,7 @@ import SelectBox from "../../components/Elements/SelectBox";
 import TableFragments from "../../components/Fragments/TableFragments";
 import Alert from "../../components/Elements/Alert";
 import { accessEvents } from "../../constants/access";
+import { IoMdAddCircle } from "react-icons/io";
 
 function PagesEvents() {
   const navigate = useNavigate();
@@ -135,7 +136,8 @@ function PagesEvents() {
               }
               onClick={() => navigate("/events/create")}
             >
-              Tambah
+              <IoMdAddCircle className="w-6 h-6 fill-current inline-block" />
+              <span> Tambah</span>
             </Button>
           )}
         </div>

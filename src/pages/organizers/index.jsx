@@ -11,6 +11,7 @@ import TableFragments from "../../components/Fragments/TableFragments";
 import { useEffect, useState } from "react";
 import { accessOrganizers } from "../../constants/access";
 import { fetchOrganizers } from "../../redux/organizers/actions";
+import { IoMdAddCircle } from "react-icons/io";
 
 function PagesOrganizers() {
   const navigate = useNavigate();
@@ -85,7 +86,8 @@ function PagesOrganizers() {
               }
               onClick={() => navigate("/organizers/create")}
             >
-              Tambah
+              <IoMdAddCircle className="w-6 h-6 fill-current inline-block" />
+              <span> Tambah</span>
             </Button>
           )}
         </div>

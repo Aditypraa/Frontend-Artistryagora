@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Button from "../../components/Elements/Button";
 import InputForm from "../../components/Elements/InputForm";
+import { FaRegSave } from "react-icons/fa";
 
 function FormCategories({
   handleSubmit,
@@ -27,7 +28,8 @@ function FormCategories({
           onClick={handleSubmit}
           loading={isLoading}
         >
-          {edit ? "Ubah" : "Simpan"}
+          <FaRegSave className="w-6 h-6 fill-current inline-block" />
+          <span> {edit ? "Edit" : "Simpan"}</span>
         </Button>
       </div>
     </div>

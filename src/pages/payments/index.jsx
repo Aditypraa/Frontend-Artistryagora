@@ -11,6 +11,7 @@ import Alert from "../../components/Elements/Alert";
 import TableFragments from "../../components/Fragments/TableFragments";
 import { useEffect, useState } from "react";
 import { fetchPayments } from "../../redux/payments/actions";
+import { IoMdAddCircle } from "react-icons/io";
 
 function PagesPayments() {
   const navigate = useNavigate();
@@ -86,7 +87,8 @@ function PagesPayments() {
               }
               onClick={() => navigate("/payments/create")}
             >
-              Tambah
+              <IoMdAddCircle className="w-6 h-6 fill-current inline-block" />
+              <span> Tambah</span>
             </Button>
           )}
         </div>

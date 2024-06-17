@@ -11,6 +11,7 @@ import Button from "../../components/Elements/Button";
 import Alert from "../../components/Elements/Alert";
 import TableFragments from "../../components/Fragments/TableFragments";
 import { useEffect, useState } from "react";
+import { IoMdAddCircle } from "react-icons/io";
 
 function PagesAdmins() {
   const navigate = useNavigate();
@@ -85,7 +86,8 @@ function PagesAdmins() {
               }
               onClick={() => navigate("/admins/create")}
             >
-              Tambah
+              <IoMdAddCircle className="w-6 h-6 fill-current inline-block" />
+              <span> Tambah</span>
             </Button>
           )}
         </div>
