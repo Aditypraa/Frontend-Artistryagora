@@ -4,6 +4,8 @@ import Button from "../../components/Elements/Button";
 import InputForm from "../../components/Elements/InputForm";
 import SelectBox from "../../components/Elements/SelectBox";
 import { config } from "../../configs";
+import TextArea from "../../components/Elements/TextArea";
+import { IoCloseCircleOutline } from "react-icons/io5";
 
 export default function EventsForm({
   handleSubmit,
@@ -67,8 +69,8 @@ export default function EventsForm({
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 mt-4">
-        <div className="w-full md:w-1/2 px-3">
-          <InputForm
+        <div className="w-full md:w-1/2 px-6">
+          <TextArea
             placeholder="Masukan about"
             label="About"
             name="about"
@@ -104,23 +106,24 @@ export default function EventsForm({
               />
               {index !== 0 && (
                 <Button
-                  className="ml-2 text-red-500 p-1 bg-red-500"
+                  className=" text-red-500 p-2 mt-8 bg-red-500"
                   onClick={() => handleMinusKeyPoint(index)}
                 >
-                  &times;
+                  <IoCloseCircleOutline />
                 </Button>
               )}
             </div>
           </div>
         ))}
       </div>
-
-      <Button
-        className="bg-green-500 text-white py-2 px-4 rounded mt-2"
-        onClick={handlePlusKeyPoint}
-      >
-        Tambah keypoint
-      </Button>
+      <div className="w-full md:w-1/2 px-3">
+        <Button
+          className="bg-green-500 text-white py-2 px-4 rounded mt-2"
+          onClick={handlePlusKeyPoint}
+        >
+          Tambah keypoint
+        </Button>
+      </div>
 
       <div className="flex flex-wrap -mx-3 mt-4">
         <div className="w-full md:w-1/2 px-3">
@@ -136,82 +139,84 @@ export default function EventsForm({
         </div>
         <div className="w-full md:w-1/2 px-3">
           <InputForm
-            placeholder="Masukan Avatar"
             label="Cover"
+            placeholder="Masukan Avatar"
             name="avatar"
             type="file"
             onChange={handleChange}
           />
           {form.avatar && (
             <div className="mt-2">
-              <figure>
+              <figure className="flex flex-col justify-center items-center">
                 <img
-                  width={171}
-                  height={180}
+                  width={400}
+                  height={400}
                   alt="171x180"
                   src={`${config.VITE_API_IMAGE_DEV}/${form.avatar}`}
                 />
-                <figcaption>Perview image cover</figcaption>
+                <figcaption>Preview image cover</figcaption>
               </figure>
             </div>
           )}
         </div>
       </div>
 
-      <label className="block mt-4">Tickets</label>
       {form.tickets.map((tic, index) => (
-        <div className="flex flex-wrap -mx-3 " key={index}>
-          <div className="w-full md:w-1/2 px-3">
-            <InputForm
-              placeholder="Masukan tipe tiket"
-              label="type"
-              name="type"
-              value={tic.type}
-              type="text"
-              onChange={(e) => handleChangeTicket(e, index)}
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <InputForm
-              placeholder="Masukan Harga"
-              label="Harga"
-              name="price"
-              value={tic.price}
-              type="number"
-              onChange={(e) => handleChangeTicket(e, index)}
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <InputForm
-              placeholder="Masukan tipe tiket"
-              label="Stock"
-              name="stock"
-              value={tic.stock}
-              type="number"
-              onChange={(e) => handleChangeTicket(e, index)}
-            />
-          </div>
-          <div className="w-full md:w-1/2 px-3 flex items-center">
-            <InputForm
-              placeholder="Masukan Status Tiket"
-              label="Status Ticket"
-              name="statusTicketCategories"
-              value={tic.statusTicketCategories}
-              type="text"
-              onChange={(e) => handleChangeTicket(e, index)}
-            />
-            {index !== 0 && (
-              <Button
-                className="ml-2 text-red-500 p-1 bg-red-500"
-                onClick={() => handleMinusTicket(index)}
-              >
-                &times;
-              </Button>
-            )}
+        <div key={index}>
+          <label className="block mt-4">Tickets</label>
+          <div className="flex flex-wrap -mx-3 ">
+            <div className="w-full md:w-1/2 px-3">
+              <InputForm
+                placeholder="Masukan tipe tiket"
+                label="Type"
+                name="type"
+                value={tic.type}
+                type="text"
+                onChange={(e) => handleChangeTicket(e, index)}
+              />
+            </div>
+            <div className="w-full md:w-1/2 px-3">
+              <InputForm
+                placeholder="Masukan Harga"
+                label="Harga"
+                name="price"
+                value={tic.price}
+                type="number"
+                onChange={(e) => handleChangeTicket(e, index)}
+              />
+            </div>
+            <div className="w-full md:w-1/2 px-3">
+              <InputForm
+                placeholder="Masukan tipe tiket"
+                label="Stock"
+                name="stock"
+                value={tic.stock}
+                type="number"
+                onChange={(e) => handleChangeTicket(e, index)}
+              />
+            </div>
+            <div className="w-full md:w-1/2 px-3 flex items-center">
+              <InputForm
+                placeholder="Masukan Status Tiket"
+                label="Status Ticket"
+                name="statusTicketCategories"
+                value={tic.statusTicketCategories}
+                type="text"
+                onChange={(e) => handleChangeTicket(e, index)}
+              />
+              {index !== 0 && (
+                <Button
+                  className=" text-red-500 p-2 mt-8 bg-red-500"
+                  onClick={() => handleMinusTicket(index)}
+                >
+                  <IoCloseCircleOutline />
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       ))}
-      <div className="mb-3">
+      <div className="w-full md:w-1/2 px-3">
         <Button
           className="bg-green-500 text-white py-2 px-4 rounded"
           onClick={handlePlusTicket}
@@ -224,7 +229,7 @@ export default function EventsForm({
         <Button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="w-full px-5 py-3 bg-blue-500 hover:shadow-[#6025F5]/50"
+          className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 "
         >
           <FaRegSave className="w-6 h-6 fill-current inline-block" />
           <span> {edit ? "Edit" : "Simpan"}</span>

@@ -80,48 +80,46 @@ function PagesTalents() {
     <>
       <CmsLayouts>
         <Breadcrumbs textSecound={"Talents"} />
-        <section className="container mx-auto p-6">
-          <div className="mb-3">
-            {access.tambah && (
-              <Button
-                className={
-                  "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
-                }
-                onClick={() => navigate("/talents/create")}
-              >
-                <IoMdAddCircle className="w-6 h-6 fill-current inline-block" />
-                <span> Tambah</span>
-              </Button>
-            )}
-          </div>
+        <div className="mb-3">
+          {access.tambah && (
+            <Button
+              className={
+                "text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 "
+              }
+              onClick={() => navigate("/talents/create")}
+            >
+              <IoMdAddCircle className="w-6 h-6 fill-current inline-block" />
+              <span> Tambah</span>
+            </Button>
+          )}
+        </div>
 
-          <SearchInput
-            query={talents.keyword}
-            handleChange={(e) => dispatch(setKeyword(e.target.value))}
-          />
+        <SearchInput
+          query={talents.keyword}
+          handleChange={(e) => dispatch(setKeyword(e.target.value))}
+        />
 
-          <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
-            <div className="w-full overflow-x-auto">
-              {notif.status && (
-                <Alert
-                  title={notif.typeNotif}
-                  description={notif.message}
-                  className={"bg-green-400 text-black"}
-                />
-              )}
-
-              <TableFragments
-                status={talents?.status} // Optional chaining
-                thead={["Nama", "Role", "Avatar", "Aksi"]}
-                data={talents?.data || []} // Default value if data is undefined
-                tbody={["name", "role", "avatar"]}
-                editUrl={access.edit ? `/talents/edit` : null}
-                deleteAction={access.hapus ? (id) => handleDelete(id) : null}
-                withoutPagination
+        <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
+          <div className="w-full overflow-x-auto">
+            {notif.status && (
+              <Alert
+                title={notif.typeNotif}
+                description={notif.message}
+                className={"bg-green-400 text-black"}
               />
-            </div>
+            )}
+
+            <TableFragments
+              status={talents?.status} // Optional chaining
+              thead={["Nama", "Role", "Profile", "Aksi"]}
+              data={talents?.data || []} // Default value if data is undefined
+              tbody={["name", "role", "avatar"]}
+              editUrl={access.edit ? `/talents/edit` : null}
+              deleteAction={access.hapus ? (id) => handleDelete(id) : null}
+              withoutPagination
+            />
           </div>
-        </section>
+        </div>
       </CmsLayouts>
     </>
   );

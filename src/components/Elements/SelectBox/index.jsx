@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import Select from "react-select";
+import Label from "../InputForm/Label";
 
 function SelectBox({
   name,
@@ -11,8 +12,8 @@ function SelectBox({
   label,
 }) {
   return (
-    <form className="mb-2">
-      {label && <label>{label}</label>}
+    <form className="my-3 mx-3">
+      {label && <Label>{label}</Label>}
       <Select
         name={name}
         isClearable={isClearable}

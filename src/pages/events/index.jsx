@@ -132,7 +132,7 @@ function PagesEvents() {
           {access.tambah && (
             <Button
               className={
-                "px-4 py-2 from-[#4f5de2] to-[#0025f5] hover:shadow-[#6025F5]/50"
+                "text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 "
               }
               onClick={() => navigate("/events/create")}
             >
@@ -144,7 +144,7 @@ function PagesEvents() {
 
         {/* Select Box */}
         <div className="flex flex-wrap -mx-3">
-          <div className="w-full px-3 md:w-1/3">
+          <div className="w-full mt-2 px-3 md:w-1/3">
             <SearchInput
               name="keyword"
               query={events.keyword}

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { FaHome, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NavAccess from "../Elements/NavAccess";
 import imageProfile2 from "../../assets/profile2.png";
 
@@ -30,6 +30,9 @@ function Sidebar() {
   const sidebarRef = useRef(null);
   const [role, setRole] = useState(null);
   const [email, setEmail] = useState(null);
+  const [activeItem, setActiveItem] = useState("");
+
+  const location = useLocation();
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -65,10 +68,16 @@ function Sidebar() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setActiveItem(location.pathname);
+  }, [location]);
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/signin";
   };
+
+  const isActive = (path) => (activeItem === path ? "bg-teal-500" : "");
 
   return (
     <>
@@ -135,17 +144,23 @@ function Sidebar() {
                 <Link
                   to={"/"}
                   title="Artistry Agora"
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/dashboard"
+                  )}`}
+                  onClick={() => setActiveItem("/dashboard")}
                 >
                   <FaHome className="w-6 h-6 fill-current inline-block" />
-                  <span className=""> Home</span>
+                  <span> Home</span>
                 </Link>
                 <NavAccess
                   to={"/categories"}
                   title="Categories"
                   role={role}
                   roles={accessCategories.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/categories"
+                  )}`}
+                  onClick={() => setActiveItem("/categories")}
                 >
                   <MdOutlineCategory className="w-6 h-6 fill-current inline-block" />
                   <span> Categories</span>
@@ -155,7 +170,10 @@ function Sidebar() {
                   title="Talents"
                   role={role}
                   roles={accessTalents.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/talents"
+                  )}`}
+                  onClick={() => setActiveItem("/talents")}
                 >
                   <IoPeopleCircleOutline className="w-6 h-6 fill-current inline-block" />
                   <span> Talents</span>
@@ -165,7 +183,10 @@ function Sidebar() {
                   title="Payments"
                   role={role}
                   roles={accessPayments.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/payments"
+                  )}`}
+                  onClick={() => setActiveItem("/payments")}
                 >
                   <MdOutlinePayments className="w-6 h-6 fill-current inline-block" />
                   <span> Payments</span>
@@ -175,7 +196,10 @@ function Sidebar() {
                   title="Events"
                   role={role}
                   roles={accessEvents.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/events"
+                  )}`}
+                  onClick={() => setActiveItem("/events")}
                 >
                   <MdOutlineEmojiEvents className="w-6 h-6 fill-current inline-block" />
                   <span> Events</span>
@@ -185,7 +209,10 @@ function Sidebar() {
                   title="Admin"
                   role={role}
                   roles={accessAdmin.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/admins"
+                  )}`}
+                  onClick={() => setActiveItem("/admins")}
                 >
                   <RiAdminLine className="w-6 h-6 fill-current inline-block" />
                   <span> Admin</span>
@@ -195,7 +222,10 @@ function Sidebar() {
                   title="Organizers"
                   role={role}
                   roles={accessOrganizers.lihat}
-                  className="text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/organizers"
+                  )}`}
+                  onClick={() => setActiveItem("/organizers")}
                 >
                   <GiOrganigram className="w-6 h-6 fill-current inline-block" />
                   <span> Organizers</span>
@@ -205,7 +235,10 @@ function Sidebar() {
                   title="Orders"
                   role={role}
                   roles={accessOrders.lihat}
-                  className="text-sm font-medium text-white py-2 px-2  hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                  className={`text-sm font-medium text-white py-2 px-2 hover:bg-teal-500 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out ${isActive(
+                    "/orders"
+                  )}`}
+                  onClick={() => setActiveItem("/orders")}
                 >
                   <GrTransaction className="w-6 h-6 fill-current inline-block" />
                   <span> Orders</span>
