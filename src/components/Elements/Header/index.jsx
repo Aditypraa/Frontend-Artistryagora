@@ -1,3 +1,5 @@
+import imageAdmin2 from "../../../assets/logo/admin2.svg";
+
 function Header() {
   return (
     <>
@@ -15,7 +17,7 @@ function Header() {
             </p>
           </div>
           <div className="lg:w-1/2">
-            <img src="/public/admin2.svg" alt="Dashboard Admin" />
+            <img src={imageAdmin2} alt="Dashboard Admin" />
           </div>
         </div>
       </section>
